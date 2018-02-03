@@ -13,3 +13,14 @@ def play():
             print("West of the Word, Lets Go!")
         elif action_input in ["e","E","East","east"]
             print("East.")
+        elif action_input in ['i', 'I', 'inventory']:
+            player.print_inventory()
+        else:
+            print("Can't do that yet, bub.")
+
+def get_player_command():
+    return input('Action: ')
+
+
+play()
+        
