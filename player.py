@@ -21,6 +21,5 @@ class Player:
                     max_damage = item.damage
             except AttributeError:
                 pass
-        return best_wepon
-s        
+        return best_weapon       
         
