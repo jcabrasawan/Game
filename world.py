@@ -1,5 +1,5 @@
 class MapTile:
-    def __init__(self, x, y):
+    def __init__(self, x=0, y=0):
         self.x = x
         self.y = y
 
@@ -12,6 +12,7 @@ class StartTile(MapTile):
 
 class World:
     map = [
+        [StartTile()]
         ]
         
     def __init__(self):

@@ -51,28 +51,83 @@ def play():
     print_wrap(world.tile_at(player.x,player.y).intro_text())
     while True:
         print("")							# Print a blank line for spacing purposes.
-        [raw_input, parsed_input] = parser.get_command()
+        [raw_input, parsed_input] = parse.get_command()
         print("")
-        if action_input in ["n","N","North","north"]:
-            player.move_north()
-            print("Northward Ho!")
-        elif action_input in ["s","S","South","south"]:
-            player.move_south()
-            print("South, Baby!")
-        elif action_input in ["w","W","West","west"]:
-            player.move_west()
-            print("West of the Word, Lets Go!")
-        elif action_input in ["e","E","East","east"]:
-            player.move_east()
-            print("East.")
-        elif action_input in ['i', 'I', 'inventory']:
-            player.print_inventory()
+        def get_player_command():
+            return input('Action: ')
+
+            if(parsed_input):
+                if(len(parsed_input)==1):
+                    if(parsed_input[0] == "help"):
+                        print_wrap(help_text)
+                    elif(parsed_input[0] == "check"):
+                        print_wrap(world.tile_at(player.x,player.y).intro_text())
+                    elif(parsed_input[0] == "exit" or parsed_input[0] == quit):
+                        exit()
+                    else:
+                        print("I don't understand what you are trying to do. Please try again.")
+                elif(len(parsed_input) == 2):
+                    if(parsed_input[0] == "go"):													### Command "go"
+                        move_status = False
+                        if(parsed_input[1] == "north"):
+                            [move_status, move_description] = world.check_north(player.x, player.y)
+                            print_wrap(move_description)
+                            if(move_status):
+                                player.move_north()
+                                print("Northward Ho!")
+                        elif(parsed_input[1] == "south"):
+                            [move_status, move_description] = world.check_south(player.x, player.y)
+                            print_wrap(move_description)
+                            if(move_status):
+                                player.move_south()
+                                print("South, Baby!")
+                        elif(parsed_input[1] == "west"):
+                            [move_status, move_description] = world.check_west(player.x, player.y)
+                            print_wrap(move_description)
+                            if(move_status):
+                                player.move_west()
+                                print("West of the Word, Lets Go!")
+                        elif(parsed_input[1] == "east"):
+                            [move_status, move_description] = world.check_east(player.x, player.y)
+                            print_wrap(move_description)
+                            if(move_status):
+                                player.move_east()  
+                                print("East.")
+                        else:
+                            print("Can't do that yet, bub.")
+                    if(parsed_input[1] == "inventory"):
+                        player.print_inventory()
+                    else:
+                        print("Can't do that yet, bub.")
+
+                    if(move_status):		# If we have successfully moved, give the player the new location's description.
+                        print_wrap(world.tile_at(player.x,player.y).intro_text())
+
+                elif(parsed_input[0] == "check"):													### Command "check"
+                    if(parsed_input[1] == "inventory"):
+                        player.print_inventory()
+                    elif(parsed_input[1] == "around"):
+                        print_wrap(world.tile_at(player.x,player.y).intro_text())
+                    else:
+                        print("I don't know what you're trying to look at.")
+        
+                else:
+                    print("I don't understand what you are trying to do. Please try again.")
+            else:
+                print("I don't understand what you are trying to do. Please try again.")
+
+
+        if(debug_mode):	
+            print()
+            print("RAW USER COMMANDS: " + raw_input)
+            print("PARSED USER COMMANDS: " + str(parsed_input))
+#for word in parsed_input:
+#	if(word):
+#		print(word + " ")
+#	else:
+#		print("None")
         else:
-            print("Can't do that yet, bub.")
-
-def get_player_command():
-    return input('Action: ')
-
+            print("Something seems to have gone wrong. Please try again.")
 
 play()
         
