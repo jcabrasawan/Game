@@ -92,13 +92,14 @@ def play():
                         print_wrap(move_description)
                         if(move_status):
                             player.move_east()  
-                            print("East.")
+                            print("East.")           
                     else:
                         print("Can't do that yet, bub.")
-                    if(parsed_input[1] == "inventory"):
-                        player.print_inventory()
-                    else:
-                        print("Can't do that yet, bub.")
+                   
+                if(parsed_input[1] == "inventory"):
+                    player.print_inventory()
+                else:
+                    print("Can't do that yet, bub.")
 
                     if(move_status):		# If we have successfully moved, give the player the new location's description.
                         print_wrap(world.tile_at(player.x,player.y).intro_text())

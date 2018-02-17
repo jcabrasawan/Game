@@ -8,7 +8,7 @@ class Player:
 
     def print_inventory(self):
         print("Inventory:")
-        for item in self.invventory:
+        for item in self.inventory:
             print("*"+ str(item))
         best_weapon = self.most_powerful_weapon()
         print("Your best weapon is your {}".format(best_weapon))
