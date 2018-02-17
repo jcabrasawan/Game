@@ -3,8 +3,8 @@ import items
 class Player:
     def __init__(self):
         self.inventory = [items.Rock(), items.Dagger(),"Gold(5)","Crusty Bread"]
-        self.x = 1
-        self.y = 1
+        self.x = 0
+        self.y = 0
 
     def move(self, dx, dy):
         self.x += dx
