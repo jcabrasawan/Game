@@ -6,13 +6,37 @@ class MapTile:
     def intro_text(self):
         raise NotImplementedError("Create a sublass instead!")
 
-class StartTile(MapTile):
+class Start(MapTile):
     def intro_text(self):
         return "Welcome! Please choose one item to continue!"
+#find out a way to teleport from this tile to the village, will probably go in this class.
 
+class Village(MapTile):
+    def intro_text(self):
+        return "It's a small village with plenty of friendly villagers."
+
+class Blank(MapTile):
+    def intro_text(self):
+        return "CONSTRUCTION TILE FOR GMs"
+
+class Forest(MapTile):
+    def intro_text(self):
+        return "You're surrounded by tall trees."
+
+class ForestPath(MapTile):
+    def intro_text(self):
+        return "You're on a small path surrounded by tall trees. It doesn't seem to be well-traveled."
+
+class Clearing(MapTile):
+    def intro_text(self):
+        return "It's a small clearing."
+    
 class World:
     map = [
-        [StartTile()]
+        [Start(),   None],
+        [Blank(),  Village(),  Village(),  Village(),  Forest(),   ForestPath(),   Forest(),   Clearing(), Clearing(), Forest()],
+        [Forest(),  Village(),  Village(),  Village(),  Forest(), ForestPath(),   ForestPath(), Clearing(), Clearing(), Forest()],
+        [Forest(),  Village(),  Village(),  Village(),  Forest(), ForestPath(), Forest(),   Forest(),   Forest(),   Forest()],
         ]
         
     def __init__(self):
