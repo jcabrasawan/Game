@@ -34,7 +34,7 @@ class Clearing(MapTile):
 class World:
     map = [
         [Start(),   None],
-        [Blank(),  Village(),  Village(),  Village(),  Forest(),   ForestPath(),   Forest(),   Clearing(), Clearing(), Forest()],
+        [Blank(),   Blank(),  Village(),  Village(),  Village(),  Forest(),   ForestPath(),   Forest(),   Clearing(), Clearing(), Forest()],
         [Forest(),  Village(),  Village(),  Village(),  Forest(), ForestPath(),   ForestPath(), Clearing(), Clearing(), Forest()],
         [Forest(),  Village(),  Village(),  Village(),  Forest(), ForestPath(), Forest(),   Forest(),   Forest(),   Forest()],
         ]
