@@ -59,6 +59,3 @@ def most_powerful_weapon(inventory):
             pass
 
     return best_weapon
-
-play()
-print('Your best weapon is: '+ repr(most_powerful_weapon(inventory)))
