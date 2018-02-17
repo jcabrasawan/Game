@@ -63,9 +63,9 @@ class World:
     	    room = None
 		
         if(room):
-            return [True, "You head to the north."]
+            return [True, "Northward Ho!"]
         else:
-            return [False, "There doesn't seem to be anything to the north."]
+            return [False, "Nah fam."]
 			
     def check_south(self, x, y):
         if y+1 < 0:
@@ -76,9 +76,9 @@ class World:
             room = None
     
         if(room):
-            return [True, "You head to the south."]
+            return [True, "South, Baby!"]
         else:
-            return [False, "There doesn't seem to be anything to the south."]
+            return [False, "Nah fam."]
 
     def check_west(self, x, y):
         if x-1 < 0:
@@ -89,9 +89,9 @@ class World:
             room = None
 
         if(room):
-            return [True, "You head to the west."]
+            return [True, "West of the Word, Lets Go!"]
         else:
-            return [False, "There doesn't seem to be anything to the west."]
+            return [False, "Nah fam."]
 
     def check_east(self, x, y):
         if x+1 < 0:
@@ -102,7 +102,7 @@ class World:
             room = None
 
         if(room):
-            return [True, "You head to the east."]
+            return [True, "East."]
         else:
-            return [False, "There doesn't seem to be anything to the east."]
+            return [False, "Nah fam."]
 
