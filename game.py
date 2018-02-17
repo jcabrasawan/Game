@@ -90,10 +90,10 @@ def play():
                         if(move_status):
                             player.move_east()    
 
-                if(parsed_input[1] == "inventory"):
-                    player.print_inventory()
-                else:
-                    print("Can't do that yet, bub.")
+            if(parsed_input[1] == "inventory"):
+                player.print_inventory()
+            else:
+                print("Can't do that yet, bub.")
             
             if(parsed_input[0] == "check"):													### Command "check"
                 if(parsed_input[1] == "inventory"):
