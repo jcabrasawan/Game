@@ -45,17 +45,19 @@ def print_wrap(text):
 
 def play():
     clear_screen()
+    
     print_wrap("Welcome to %s." % game_name)
+    
     player = Player()
     world = World()
+    
     print_wrap(world.tile_at(player.x,player.y).intro_text())
+   
     while True:
         print("")							# Print a blank line for spacing purposes.
         [raw_input, parsed_input] = parse.get_command()
-        print("")
-        def get_player_command():
-            return input('Action: ')
-
+        print("")							# Print a blank line for spacing purposes.
+		
         if(parsed_input):
             if(len(parsed_input)==1):
                 if(parsed_input[0] == "help"):
@@ -79,34 +81,36 @@ def play():
                         print_wrap(move_description)
                         if(move_status):
                             player.move_south()
-                    elif(parsed_input[1] == "west"):
-                        [move_status, move_description] = world.check_west(player.x, player.y)
-                        print_wrap(move_description)
-                        if(move_status):
-                            player.move_west()
                     elif(parsed_input[1] == "east"):
                         [move_status, move_description] = world.check_east(player.x, player.y)
                         print_wrap(move_description)
                         if(move_status):
-                            player.move_east()    
-
-            if(parsed_input[1] == "inventory"):
-                player.print_inventory()
-            else:
-                print("Can't do that yet, bub.")
-            
-            if(parsed_input[0] == "check"):													### Command "check"
-                if(parsed_input[1] == "inventory"):
-                    player.print_inventory()
-                elif(parsed_input[1] == "around"):
-                    print_wrap(world.tile_at(player.x,player.y).intro_text())
+                            player.move_east()
+                    elif(parsed_input[1] == "west"):
+                        [move_status, move_description] = world.check_west(player.x, player.y)
+                        print_wrap(move_description)
+                        if(move_status):
+                            player.move_west()		
+                    else:
+                        print("NO THANKS")
+					
+					
+                    if(move_status):		# If we have successfully moved, give the player the new location's description.
+                        print_wrap(world.tile_at(player.x,player.y).intro_text())
+						
+						
+                elif(parsed_input[0] == "check"):													### Command "check"
+                    if(parsed_input[1] == "inventory"):
+                        player.print_inventory()
+                    elif(parsed_input[1] == "around"):
+                        print_wrap(world.tile_at(player.x,player.y).intro_text())
+                    else:
+                        print("I don't know what you're trying to look at.")
+						
                 else:
-                    print("I don't know what you're trying to look at.")
-
-        if(move_status):		# If we have successfully moved, give the player the new location's description.
-            print_wrap(world.tile_at(player.x,player.y).intro_text())
-
-
+                    print("I don't understand what you are trying to do. Please try again.")
+            else:
+                print("I don't understand what you are trying to do. Please try again.")
 
         if(debug_mode):	
             print()
