@@ -36,7 +36,75 @@ class Item:
 	def handle_input(self, verb, noun1, noun2, inventory):
 		return [False, None, inventory]
 		
+class Container:
+	name = "Do not create raw Container objects!"
+	
+	closed_description = "You should define a closed description for containers in their subclass."
+	open_description = "You should define an open description for containers in their subclass."
+	
+	closed = True
+	
+	contents = []
+	
+	def __init__(self, items = []):
+		for item in items:
+			if(len(self.contents) == 0):
+				self.contents = [item]
+			else:
+				self.contents.append(item)
+	
+	def add_item(self, item):
+		if(len(self.contents) == 0):
+			self.contents = [item]		# Initialize the list if it is empty.
+		else:
+			self.contents.append(item)	# Add to the list if it is not empty.
+			
+	def remove_item(self, item):
+		removal_index = -1
+		for index in range(len(self.contents)):
+			if(self.contents[index].name == item.name):
+				removal_index = index
+		if(removal_index >= 0):
+			self.contents.pop(removal_index)
+	
+			
+	def __str__(self):
+		return self.name	
+
+	def room_text(self):
+		if(self.closed):					# We may want to have a different description for a container if it is open or closed.
+			return self.closed_description
+		else:
+			return self.open_description
+
+	def check_text(self):
+		if(self.closed):
+			return self.closed_description
+		else:
+			if(len(self.contents) > 0):
+				print("The %s contains:" % self.name)
+				for item in self.contents:
+					print('* ' + str(item).title())
+			else:
+				return "The %s is empty." % self.name
 		
+	def handle_input(self, verb, noun1, noun2, inventory):			
+		return [False, "", inventory]
+    		
+class Weapon(Item):
+	equip_description = "You should define flavor text for equipping this item in its subclass."
+	attack_descriptions = ["You should define one or more attack descriptions as a list in your subclass.", "This is an example secondary attack description"]
+
+	damage = 0		# Define this appropriately in your subclass.
+		
+	def equip_text(self):
+		return self.equip_description
+			
+	def attack(self):
+		return [self.attack_descriptions[randint(0, len(self.attack_descriptions))], self.damage]		# Return damage and a random attack description from your list.
+		
+
+
 class Iron_Key(Item):
 	name = "iron key"
 	
@@ -51,7 +119,30 @@ class Consumable(Item):
 		
 	def consume(self):
 		return [self.consume_description, self.healing_value]
-			
+
+class Class(Item):
+    define_description = "Flavor text in subclass"
+    healing_value = 0
+    
+    player.update_class()
+    
+    def teleport(self):
+        
+class Toy_Skull(Class):
+    name = "Toy Skull"
+    
+    description = "A small toy skull that looks scarily realistic."
+    
+        
+class Fluffy_Blanket(Class):
+    name = "Fluffy Baby Blanket"
+    
+    description = "A tiny blanket that looks like it would only cover your feet."
+        
+class Ancient_Coin(Class):
+    name = "Ancient Gold Coin"
+    
+    description = "An antique brittle coin. It doesn't look valuable."
 
 class Crusty_Bread(Consumable):
 	name = "crusty bread"
@@ -69,19 +160,6 @@ class Red_Potion(Consumable):
 	
 	
 	
-
-class Weapon(Item):
-	equip_description = "You should define flavor text for equipping this item in its subclass."
-	attack_descriptions = ["You should define one or more attack descriptions as a list in your subclass.", "This is an example secondary attack description"]
-
-	damage = 0		# Define this appropriately in your subclass.
-		
-	def equip_text(self):
-		return self.equip_description
-			
-	def attack(self):
-		return [self.attack_descriptions[randint(0, len(self.attack_descriptions))], self.damage]		# Return damage and a random attack description from your list.
-		
 
 
 class Rock(Weapon):
@@ -140,62 +218,6 @@ class Mountain_of_Gold(Gold):
 	dropped_description = "A lustrous mountain of gold coins is lying on the ground."
 	
 	
-class Container:
-	name = "Do not create raw Container objects!"
-	
-	closed_description = "You should define a closed description for containers in their subclass."
-	open_description = "You should define an open description for containers in their subclass."
-	
-	closed = True
-	
-	contents = []
-	
-	def __init__(self, items = []):
-		for item in items:
-			if(len(self.contents) == 0):
-				self.contents = [item]
-			else:
-				self.contents.append(item)
-	
-	def add_item(self, item):
-		if(len(self.contents) == 0):
-			self.contents = [item]		# Initialize the list if it is empty.
-		else:
-			self.contents.append(item)	# Add to the list if it is not empty.
-			
-	def remove_item(self, item):
-		removal_index = -1
-		for index in range(len(self.contents)):
-			if(self.contents[index].name == item.name):
-				removal_index = index
-		if(removal_index >= 0):
-			self.contents.pop(removal_index)
-	
-			
-	def __str__(self):
-		return self.name	
-
-	def room_text(self):
-		if(self.closed):					# We may want to have a different description for a container if it is open or closed.
-			return self.closed_description
-		else:
-			return self.open_description
-
-	def check_text(self):
-		if(self.closed):
-			return self.closed_description
-		else:
-			if(len(self.contents) > 0):
-				print("The %s contains:" % self.name)
-				for item in self.contents:
-					print('* ' + str(item).title())
-			else:
-				return "The %s is empty." % self.name
-		
-	def handle_input(self, verb, noun1, noun2, inventory):			
-		return [False, "", inventory]
-
-		
 class Old_Chest(Container):
 	name = "old chest"
 	closed_description = "A battered old chest sits against the far wall, its lid shut tightly."

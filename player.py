@@ -5,10 +5,17 @@ class Player:
 		self.inventory = [items.Rock(),
 						items.Dagger(),
 						items.Crusty_Bread()]
-		self.gold = 5
+		self.gold = 0
 		self.hp = 100
+        self.mp = 0
+        self.carry = 0
 		self.x = 2
-		self.y = 3
+		self.y = 3  
+        
+        mage = False
+        warrior = False
+        thief = False
+        
 
 	def print_inventory(self):
 		print("Inventory:")
@@ -68,3 +75,47 @@ class Player:
 				self.inventory.pop(index)
 			self.gold += gold_total
 			print("Your wealth increased by %d Gold." % gold_total)
+            
+    def mage(self):
+        self.hp = 75
+        self.mp = 75
+        self.carry = 25
+        
+        class_description = "You can do all sorts of mage-like things now " \
+                            "like eat souls and fight with mushrooms. Because obviously that's how this all works."
+    
+    def warrior(self):
+        self.hp = 125
+        self.mp = 0
+        self.carry = 20
+        
+        class_description = "You're an all-around cool dude warrior, well-loved by everyone. " \
+                            "You were the bomb back in high school, voted most likely to be successful for 3 years, but " \
+                            "you followed your dreams and now you bake for a living. " \
+                            "However, all of your pastries are so bad they're basically weapons. At least you're happy."
+        
+    def thief(self):
+        self.hp = 100
+        self.mp = 0
+        self.carry = 50
+        
+        class_description = "You're a thief, but not a very good one. No one has any clue who you are or where you came from. "\
+                            "You seem like a nice person at first, but everyone has an inherent distrust of you. "\
+                            "You've had to resort to stealing anything you can get your hands on, even if that person is "\
+                            "completely aware of you."
+            
+    def update_class(self):
+        for item in range(len(self.inventory)):
+            if(Toy_Skull = True):
+                mage = True   
+                print("You have now become a Mage.")
+                print(class_description.mage)
+            elif(Fluffy_Blanket = True):
+                warrior = True
+                print("You have now become a Warror.")
+                print(class_description.warrior)
+            elif(Ancient_Coin = True):
+                thief = True
+                print("You have now become a Thief.")
+                print(class_description.thief)
+                
