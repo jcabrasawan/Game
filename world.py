@@ -87,10 +87,6 @@ class MapTile:
 		else:
 			self.enemies.append(enemy)	# Add to the list if it is not empty.
 
-class Start(MapTile):
-    def intro_text(self):
-        return "Welcome! Please choose one item to continue!"
-#find out a way to teleport from this tile to the village, will probably go in this class.
 
 class Corridor(MapTile):
 	description = """You find yourself in a poorly lit corridor."""
@@ -178,17 +174,23 @@ class VictoryTile(MapTile):
 		"""
 		
 
+
+class Start(MapTile):
+    items = [items.Ancient_Coin('An antique coin sits on the ground. '), items.Fluffy_Blanket('A baby blanket is next to the coin. It looks soft.'), items.Toy_Skull('A beaten-up toy skull is next to the blanket.')]
+    description "You're in a small, drab room with no apparent way out. You feel a temptation to pick up one of the items."
+    
 class Village(MapTile):
-    def intro_text(self):
-        return "It's a small village with plenty of friendly villagers."
+   
+    description = "It's a small village with plenty of friendly villagers."
 
 class Blank(MapTile):
-    def intro_text(self):
-        return "CONSTRUCTION TILE FOR GMs"
+    
+    description = "CONSTRUCTION TILE FOR GMs"
 
 class Forest(MapTile):
-    def intro_text(self):
-        return "You're surrounded by tall trees."
+    
+    description = "You're surrounded by tall trees."
+    
 class ForestL(MapTile):
     def intro_text(self):
         return "You're surrounded by tall trees. You can hear muffled chatter through the trees to your right."
@@ -216,13 +218,17 @@ class Clearing(MapTile):
     def intro_text(self):
         return "It's a small clearing."
     
+class House(MapTile):
+
+class Door(MapTile):
+    
 class World:
     map = [
-        [None, None, None],
-        [None,  Start(),   None,    None,   None,   None,   None,   None,   None,   None,   None,   None,   None],
-        [None, Blank(),   Blank(),  Village(),  Village(),  Village(),  ForestR(),   ForestPathN(),   Forest(),   Clearing(), Clearing(), Forest(),  None],
-        [None, ForestL(),  Village(),  Village(),  Village(),  ForestPath(), ForestPathtoS(),   ForestPathM(), Clearing(), Clearing(), Forest(), Forest(),  None],
-        [None, ForestL(),  Village(),  Village(),  Village(),  ForestR(), ForestPathNS(), Forest(),   Forest(),   Forest(),   Forest(), Forest(),   None],
+        [None,  None,   None],
+        [None,  Start(),    None,   None,   None,   None,   None,   None,   None,   None,   None,   None,   None],
+        [None,  Blank(),    Blank(),    Village(),  Village(),  Village(),  ForestR(),   ForestPathN(),   Forest(),   Clearing(), Clearing(), Forest(),  None],
+        [None,  House(),  Door(),  Village(),  Village(),  ForestPath(), ForestPathtoS(),   ForestPathM(), Clearing(), Clearing(), Forest(), Forest(),  None],
+        [None,  ForestL(),  Village(),  Village(),  Village(),  ForestR(), ForestPathNS(), Forest(),   Forest(),   Forest(),   Forest(), Forest(),   None],
         ]
         
  
@@ -236,6 +242,7 @@ class World:
 					self.add_implied_barriers(j,i)	# If there are implied barriers (e.g. edge of map, adjacent None room, etc.) add a Wall.
 						
 					
+                    
 	def tile_at(self, x, y):
 		if x < 0 or y < 0:
 			return None
@@ -244,6 +251,7 @@ class World:
 		except IndexError:
 			return None
 			
+            
 	def check_north(self, x, y):
 		for barrier in self.map[y][x].barriers:
 			if(barrier.direction == 'north' and not barrier.passable):
@@ -316,6 +324,7 @@ class World:
 		else:
 			return [False, "There doesn't seem to be a path to the east."]
 			
+            
 	def add_implied_barriers(self, x, y):
 
 		[status, text] = self.check_north(x,y)

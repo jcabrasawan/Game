@@ -5,12 +5,12 @@ class Player:
 		self.inventory = [items.Rock(),
 						items.Dagger(),
 						items.Crusty_Bread()]
-		self.gold = 0
-		self.hp = 100
+        self.gold = 0
+        self.hp = 100
         self.mp = 0
         self.carry = 0
-		self.x = 2
-		self.y = 3  
+        self.x = 2
+        self.y = 3  
         
         mage = False
         warrior = False
