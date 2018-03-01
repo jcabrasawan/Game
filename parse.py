@@ -17,9 +17,12 @@ verbs = {'go': ['go', 'go to', 'walk', 'head', 'move'], \
 	'unlock': ['unlock'], \
 	'lock': ['lock'], \
 	'check': ['check', 'look at', 'look in', 'look', 'examine', 'inspect'], \
-	'attack': ['attack', 'fight', 'kill']}
+	'attack': ['attack', 'fight', 'kill'], \
+    'assign': ['change','become', 'classchange'],\
+    'climb' : ['scale', 'up',]}
 	
-implied_verbs = {'go': {'north': ['north', 'n'], 'south': ['south', 's'], 'east': ['east', 'e'], 'west': ['west', 'w']}, 'check': {'inventory': ['inventory', 'i']}}
+implied_verbs = {'go': {'north': ['north', 'n'], 'south': ['south', 's'], 'east': ['east', 'e'], 'west': ['west', 'w']}, 'check': {'inventory': ['inventory', 'i']}, \
+                 'assign': {['mage', 'warrior', 'thief']}}
 	
 prepositions = ["with", "to", "on", "from", "at"]
 

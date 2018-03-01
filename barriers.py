@@ -21,10 +21,10 @@ class Barrier:
 	def description(self):
 		raise NotImplementedError("Create a subclass instead!")
 		
-	def handle_input(self, verb, noun1, noun2, inventory):
-		return [False, None, inventory]
+	def handle_input(self, verb, noun1, noun2, inventory, player.hp):
+		return [False, None, inventory, player.hp]
 		
-class Wall(Barrier):
+class ImpliedWall(Barrier):
 	def description(self):
 		return "There doesn't seem to be a path to the %s." % self.direction
 		
@@ -116,3 +116,27 @@ class LockedDoor(Barrier):
 					return [True, "The door is already unlocked.", inventory]
 			
 		return [False, "", inventory]
+class VillageWall(Barrier):
+    name = 'Village Wall'
+    
+    def description(self):
+        return "There's a tall, smooth stone wall to the %s. It reminds you of a medieval castle's battlements." % self.direction
+
+class BrokenDownWall(Barrier):
+    def description(self):
+        return "There's a worn down section of the stone wall. It looks climbable for a healthy person."
+    
+    def handle_input(self, verb, player.hp)
+        if(verb == 'climb'):
+            if(player.hp >= 50):
+                self.passable = True
+                return [True, 'You scale the wall, with some difficulty', player.hp]
+            else:
+                self.passable = False
+                return [False, "You're too injured to climb the wall.", player.hp]
+    
+class BigWoodenDoor(Barrier):
+    
+class 
+    
+    

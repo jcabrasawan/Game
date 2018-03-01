@@ -86,7 +86,22 @@ def handle_input(verb, noun1, noun2):
 				return "Debug mode turned on."
 		else:
 			return "I don't know what you are trying to debug. If you want to toggle the parser's output text, just type 'debug' on its own."
-	
+    
+    elif(verb == 'assign'):
+        if(not noun2):
+            if(noun1 == 'mage'):
+                player.mage() = True
+            
+            elif(noun1 == 'warrior'):
+                player.warrior() = True
+                
+            elif(noun1 == 'thief'):
+                player.thief() = True
+                
+            else:
+                print("I'm afraid I can't let you do that.")
+        else:
+            print("I don't know what you're trying to assign. Please try a different verb-noun command pair.")
 	
 	elif(verb == 'go'):
 		if(not noun2):
@@ -151,17 +166,17 @@ def handle_input(verb, noun1, noun2):
 
 
 			
-	elif(verb):
-		[status, description] = player.handle_input(verb, noun1, noun2)
-		if(status):
-			return description
-		else:
-			[status, description, inventory] = world.tile_at(player.x, player.y).handle_input(verb, noun1, noun2, player.inventory)
-			if(status):
-				player.inventory = inventory
-				return description
-			else:
-				return "I'm not sure what you are trying to %s." % verb
+    elif(verb):
+        [status, description] = player.handle_input(verb, noun1, noun2)
+        if(status):
+            return description
+        else:
+            [status, description, inventory] = world.tile_at(player.x, player.y).handle_input(verb, noun1, noun2, player.inventory)
+            if(status):
+                player.inventory = inventory
+                return description
+            else:
+                return "I'm not sure what you are trying to %s." % verb
 	else:
 		return "I have no idea what you are trying to do. Please try again."
  
