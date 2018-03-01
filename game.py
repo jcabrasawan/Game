@@ -91,13 +91,13 @@ def handle_input(verb, noun1, noun2):
         if(not noun2):
             if(noun1 == 'mage'):
                 player.mage() = True
-            
+
             elif(noun1 == 'warrior'):
                 player.warrior() = True
-                
+
             elif(noun1 == 'thief'):
                 player.thief() = True
-                
+
             else:
                 print("I'm afraid I can't let you do that.")
         else:
