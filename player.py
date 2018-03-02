@@ -78,24 +78,29 @@ class Player:
     
               
     def update_class(self):
-        for item in range(len(self.inventory)):
-            if(Toy_Skull = True):
-                self.mage = True   
-                print("You have now become a Mage.")
-                print(class_description.mage)
+        for item in self.inventory:
+            if(isinstance(item, items.Toy_Skull):
+               self.mage = True   
+               print("You have now become a Mage.")
+               print(class_description.mage)
             
-            elif(Fluffy_Blanket = True):
-                self.warrior = True
-                print("You have now become a Warror.")
-                print(class_description.warrior)
-            
-            elif(Ancient_Coin = True):
-                self.thief = True
-                print("You have now become a Thief.")
-                print(class_description.thief)
+            elif(isinstance(item, items.Fluffy_Blanket):
+               self.warrior = True
+               print("You have now become a Warror.")
+               print(class_description.warrior)
+           
+            elif(isinstance(item, items.Ancient_Coin):
+               self.thief = True
+               print("You have now become a Thief.")
+               print(class_description.thief)
                 
             else: 
                 print('You cannot change classes right now.')
+    
+                 
+            print('You have '+self.hp+' remaining HP.')
+            print('You have '+self.mp+' remaining MP.')
+            print('You can carry '+self.carry+' more items.')
        
     def mage(self):
         self.hp = 75

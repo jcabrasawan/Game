@@ -1,5 +1,9 @@
 from random import randint 	# Used to generate random integers.
 
+from player import Player
+
+player = Player()
+
 class Item:
 	name = "Do not create raw Item objects!"
 	
