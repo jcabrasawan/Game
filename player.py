@@ -83,10 +83,12 @@ class Player:
                 self.mage = True   
                 print("You have now become a Mage.")
                 print(class_description.mage)
+            
             elif(Fluffy_Blanket = True):
                 self.warrior = True
                 print("You have now become a Warror.")
                 print(class_description.warrior)
+            
             elif(Ancient_Coin = True):
                 self.thief = True
                 print("You have now become a Thief.")

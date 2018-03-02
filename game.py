@@ -63,31 +63,8 @@ def play():
 		
 def handle_input(verb, noun1, noun2):
 	global debug_mode
-	if(verb == 'help'):
-		if(not noun1):
-			return help_text
-		else:
-			return "I'm not sure what you need help with. Try using 'help' on its own."
-
-			
-	elif(verb == 'exit'):
-		if(not noun1):
-			exit()
-		else:
-			return "Are you trying to quit the game? If so, just type 'exit' on its own."
-			
-	elif(verb == 'debug'):
-		if(not noun1):
-			if(debug_mode):
-				debug_mode = False
-				return "Debug mode turned off."
-			else:
-				debug_mode = True
-				return "Debug mode turned on."
-		else:
-			return "I don't know what you are trying to debug. If you want to toggle the parser's output text, just type 'debug' on its own."
     
-    elif(verb == 'assign'):
+    if(verb == 'assign'):
         if(not noun2):
             if(noun1 == 'mage'):
                 player.mage() = True
@@ -103,6 +80,32 @@ def handle_input(verb, noun1, noun2):
         else:
             print("I don't know what you're trying to assign. Please try a different verb-noun command pair.")
 	
+    elif(verb == 'help'):
+		if(not noun1):
+			return help_text
+		else:
+			return "I'm not sure what you need help with. Try using 'help' on its own."
+
+			
+	elif(verb == 'exit'):
+		if(not noun1):
+			exit()
+		else:
+			return "Are you trying to quit the game? If so, just type 'exit' on its own."
+        
+			
+	elif(verb == 'debug'):
+		if(not noun1):
+			if(debug_mode):
+				debug_mode = False
+				return "Debug mode turned off."
+			else:
+				debug_mode = True
+				return "Debug mode turned on."
+		else:
+			return "I don't know what you are trying to debug. If you want to toggle the parser's output text, just type 'debug' on its own."
+
+        
 	elif(verb == 'go'):
 		if(not noun2):
 			if(noun1 == 'north'):
