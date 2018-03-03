@@ -19,8 +19,8 @@ verbs = {'go': ['go', 'go to', 'walk', 'head', 'move'], \
 	'check': ['check', 'look at', 'look in', 'look', 'examine', 'inspect'], \
 	'attack': ['attack', 'fight', 'kill'], \
 	'talk': ['talk to', 'talk', 'speak to', 'speak'], \
-	'buy': ['buy', 'purchase']
-	'assign': ['change','become', 'class change'. 'change class'],\
+	'buy': ['buy', 'purchase'],\
+	"assign": ['change','become', 'class change', 'change class'],\
     'climb' : ['scale', 'up',]}
 	
 implied_verbs = {'go': {'north': ['north', 'n'], 'south': ['south', 's'], 'east': ['east', 'e'], 'west': ['west', 'w']}, 'check': {'inventory': ['inventory', 'i'], 'hp': {'hp', 'health'}}}
@@ -94,7 +94,7 @@ def parse_command(text, found_verb):
 		elif(len(text) == 2):
 			if not found_verb:
 				text[0] = None									# Get rid of the verb if we do not recognize it.
-			return text											# Return what's left of the user's input. If a verb was found, this will return input in the form [VERB, NOUN]. 
+			return text											# Return what's west of the user's input. If a verb was found, this will return input in the form [VERB, NOUN]. 
 																# If no verb was found, this will return [None, NOUN]
 		
 		elif(len(text) > 2):

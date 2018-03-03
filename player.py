@@ -161,7 +161,7 @@ class Player:
 				print(thief.description)
 				
 			else: 
-				print('You cannot change classes right now.')
+				pass
 	   
 	def mage(self):
 		self.hp = 75

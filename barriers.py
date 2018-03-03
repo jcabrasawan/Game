@@ -25,7 +25,7 @@ class Barrier:
 	def handle_input(self, verb, noun1, noun2, inventory, hp):
 		return [False, None, inventory, hp]
 		
-class ImpliedWall(Barrier):
+class Wall(Barrier):
 	def description(self):
 		return "There doesn't seem to be a path to the %s." % self.direction
 		

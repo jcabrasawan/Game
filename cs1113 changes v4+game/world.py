@@ -266,7 +266,7 @@ class NearVictory(MapTile):
 
 
 class VictoryTile(MapTile):
-	description = """You see a bright light in the distance...
+	description = """You see a beast light in the distance...
 		It grows as you get closer! It's sunlight!	
 		Victory is yours!
 		"""
@@ -288,20 +288,20 @@ class Forest(MapTile):
 	description = "You're surrounded by tall trees."
 	
 class ForestL(MapTile):
-	description = "You're surrounded by tall trees. You can hear muffled chatter through the trees to your right."
+	description = "You're surrounded by tall trees. You can hear muffled chatter through the trees to the east."
 class ForestR(MapTile):
-	description = "You're surrounded by tall trees. You can hear muffled chatter through the trees to your left."
+	description = "You're surrounded by tall trees. You can hear muffled chatter through the trees to the west."
 
 class ForestPathN(MapTile):
 	description = "You're on a small path surrounded by tall trees that travels south. It doesn't seem to be well-traveled."
 class ForestPathM(MapTile):
-	description = "You're on a small path surrounded by tall trees with branches lying to your left, right, and north. It doesn't seem to be well-traveled."
+	description = "You're on a small path surrounded by tall trees with branches lying to the west, east, and north. It doesn't seem to be well-traveled."
 class ForestPathtoS(MapTile):
 	description = "You're on a small path surrounded by tall trees running east-west with a clear path south. It doesn't seem to be well-traveled."
 class ForestPathNS(MapTile):
 	description = "You're on a small path surrounded by tall trees running north-south."
 class ForestPath(MapTile):
-	description = "You're on a small path surrounded by tall trees running east-west. You can see a break in the trees to your left."
+	description = "You're on a small path surrounded by tall trees running east-west. You can see a break in the trees to the west."
 
 class Clearing(MapTile):
 	description = "It's a small clearing."
