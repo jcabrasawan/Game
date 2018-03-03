@@ -257,7 +257,7 @@ class Nook(MapTile):
 	description = """You have entered a shadowy nook of the cave. The only way out is back the way you came."""
 	
 class Cave(MapTile):
-	npcs = [npcs.OldMan()]
+	npcs = [npc.OldMan()]
 	description = """You have entered a very dark portion of the cave. Two small fires, one on each side of the room, are glowing softly."""
 		
 		
