@@ -7,7 +7,7 @@ import parse
 
 debug_mode = True	# Use this to toggle verbose mode on the text parser.
 
-game_name = "TSoG Adventure Game"
+game_name = "Escape from Cave Terror, v4"
 
 help_text = "To interact with this game world, you will use a basic text-based interface. \
 Try single-word commands like 'inventory' or 'west' (or their counterpart abbreviations, 'i' or 'w', respectively \
@@ -16,9 +16,8 @@ or in some cases, [VERB][NOUN][OBJECT] (e.g. 'attack thief with nasty knife').\
 The game will ignore the articles 'a', 'an', and 'the' (e.g. 'open the door' is the same as 'open door.').\n\n\
 To toggle output from the game parser, type 'debug'. To exit the game at any time, type 'exit' or 'quit'."
 
-victory_text = ["Thank you for playing!", \
-				"I hope you enjoyed this game engine.", \
-				"I look forward to seeing the games you create using this as an example!"]
+		
+				
 
 player = Player()
 world = World()
@@ -59,28 +58,16 @@ def play():
 			print("Something seems to have gone wrong. Please try again.")
 			
 		player.update_inventory()
+		world.update_rooms(player)
+		
+		if(not player.is_alive()):
+			print_loss_text()
+			exit()
 			
 		
 def handle_input(verb, noun1, noun2):
 	global debug_mode
-    
-    if(verb == 'assign'):
-        if(not noun2):
-            if(noun1 == 'mage'):
-                player.mage() = True
-
-            elif(noun1 == 'warrior'):
-                player.warrior() = True
-
-            elif(noun1 == 'thief'):
-                player.thief() = True
-
-            else:
-                print("I'm afraid I can't let you do that.")
-        else:
-            print("I don't know what you're trying to assign. Please try a different verb-noun command pair.")
-	
-    elif(verb == 'help'):
+	if(verb == 'help'):
 		if(not noun1):
 			return help_text
 		else:
@@ -92,7 +79,6 @@ def handle_input(verb, noun1, noun2):
 			exit()
 		else:
 			return "Are you trying to quit the game? If so, just type 'exit' on its own."
-        
 			
 	elif(verb == 'debug'):
 		if(not noun1):
@@ -104,14 +90,15 @@ def handle_input(verb, noun1, noun2):
 				return "Debug mode turned on."
 		else:
 			return "I don't know what you are trying to debug. If you want to toggle the parser's output text, just type 'debug' on its own."
-
-        
+	
+	
 	elif(verb == 'go'):
 		if(not noun2):
 			if(noun1 == 'north'):
 				[move_status, move_description] = world.check_north(player.x, player.y)
 				if(move_status):
 					player.move_north()
+					world.tile_at(player.x, player.y).random_spawn()		# Randomly spawn enemies if possible.
 					return [move_description, world.tile_at(player.x, player.y).intro_text()]
 				else:
 					return move_description
@@ -120,6 +107,7 @@ def handle_input(verb, noun1, noun2):
 				[move_status, move_description] = world.check_south(player.x, player.y)
 				if(move_status):
 					player.move_south()
+					world.tile_at(player.x, player.y).random_spawn()		# Randomly spawn enemies if possible.
 					return [move_description, world.tile_at(player.x, player.y).intro_text()]
 				else:
 					return move_description
@@ -128,6 +116,7 @@ def handle_input(verb, noun1, noun2):
 				[move_status, move_description] = world.check_east(player.x, player.y)
 				if(move_status):
 					player.move_east()
+					world.tile_at(player.x, player.y).random_spawn()		# Randomly spawn enemies if possible.
 					return [move_description, world.tile_at(player.x, player.y).intro_text()]
 				else:
 					return move_description
@@ -136,6 +125,7 @@ def handle_input(verb, noun1, noun2):
 				[move_status, move_description] = world.check_west(player.x, player.y)
 				if(move_status):
 					player.move_west()
+					world.tile_at(player.x, player.y).random_spawn()		# Randomly spawn enemies if possible.
 					return [move_description, world.tile_at(player.x, player.y).intro_text()]
 				else:
 					return move_description	
@@ -166,20 +156,52 @@ def handle_input(verb, noun1, noun2):
 						return "I'm not sure what you are trying to look at."
 		else:
 			return "I think you are trying to look at something, but your phrasing is too complicated. Please try again."
-
+			
+	elif(verb == 'attack'):
+		if(not noun2):
+			for enemy in world.tile_at(player.x, player.y).enemies:
+				if(enemy.name.lower() == noun1):
+					if(player.weapon):
+						[attack_text, damage] = player.weapon.attack()
+						attack_text += " " + enemy.take_damage(damage)
+					else:
+						attack_text = "You try to attack, but you come up empty handed! You should equip something first..."
+					if(enemy.is_alive() and not enemy.agro):
+						attack_text += " The %s retaliated..." % enemy.name
+						attack_text += " " + player.take_damage(enemy.damage)
+					return attack_text	
+		else:
+			return "If you want to attack 'with' a weapon, please equip it first."
+		return "I'm not sure what you're trying to attack."
+	
+	elif(verb == 'buy'):
+		for npc in world.tile_at(player.x, player.y).npcs:
+			for good in npc.goods:
+				if(noun1 == good.name):
+					if(good.value > 0):
+						if(player.gold >= good.value):
+							player.gold -= good.value
+							player.inventory = npc.give(good, player.inventory)
+							return "You purchased the %s from the %s for %d gold." % (good.name, npc.name, good.value)
+						else:
+							return "You can't afford that."
+					else:
+						return "It appears to be a gift. Have you tried taking it?"
+				
+		return "That doesn't seem to be for sale."
 
 			
-    elif(verb):
-        [status, description] = player.handle_input(verb, noun1, noun2)
-        if(status):
-            return description
-        else:
-            [status, description, inventory] = world.tile_at(player.x, player.y).handle_input(verb, noun1, noun2, player.inventory)
-            if(status):
-                player.inventory = inventory
-                return description
-            else:
-                return "I'm not sure what you are trying to %s." % verb
+	elif(verb):
+		[status, description] = player.handle_input(verb, noun1, noun2)
+		if(status):
+			return description
+		else:
+			[status, description, inventory] = world.tile_at(player.x, player.y).handle_input(verb, noun1, noun2, player.inventory)
+			if(status):
+				player.inventory = inventory
+				return description
+			else:
+				return "I'm not sure what you are trying to %s." % verb
 	else:
 		return "I have no idea what you are trying to do. Please try again."
  
@@ -193,6 +215,10 @@ def print_welcome_text():
 	print()
 	
 def print_victory_text():
+	victory_text = ["Thank you for playing!", \
+				"I hope you enjoyed this game engine demo.", \
+				"I look forward to seeing the games you create using this as an example!"]
+				
 	print()
 	print_center("========================================================")
 	print()
@@ -201,6 +227,19 @@ def print_victory_text():
 	print()
 	print_center("========================================================")
 	exit()
+	
+def print_loss_text():
+	loss_text = ["You have died.", \
+				"Better luck next time!"]
+	print()
+	print_center("========================================================")
+	print()
+	for line in loss_text:
+		print_center(line)
+	print()
+	print_center("========================================================")
+	exit()
 
+	
 ### Play the game.
 play()

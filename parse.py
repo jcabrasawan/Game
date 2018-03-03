@@ -18,11 +18,12 @@ verbs = {'go': ['go', 'go to', 'walk', 'head', 'move'], \
 	'lock': ['lock'], \
 	'check': ['check', 'look at', 'look in', 'look', 'examine', 'inspect'], \
 	'attack': ['attack', 'fight', 'kill'], \
-    'assign': ['change','become', 'classchange'],\
+	'talk': ['talk to', 'talk', 'speak to', 'speak'], \
+	'buy': ['buy', 'purchase']
+	'assign': ['change','become', 'class change'. 'change class'],\
     'climb' : ['scale', 'up',]}
 	
-implied_verbs = {'go': {'north': ['north', 'n'], 'south': ['south', 's'], 'east': ['east', 'e'], 'west': ['west', 'w']}, 'check': {'inventory': ['inventory', 'i']}, \
-                 'assign': {['mage', 'warrior', 'thief']}}
+implied_verbs = {'go': {'north': ['north', 'n'], 'south': ['south', 's'], 'east': ['east', 'e'], 'west': ['west', 'w']}, 'check': {'inventory': ['inventory', 'i'], 'hp': {'hp', 'health'}}}
 	
 prepositions = ["with", "to", "on", "from", "at"]
 
