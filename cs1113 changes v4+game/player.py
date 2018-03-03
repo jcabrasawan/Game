@@ -167,7 +167,7 @@ class Player:
 		self.mage = True   
 
 		description = "You can do all sorts of mage-like things now " \
-							"like eat souls and fight with mushrooms. Because obviously that's how this all works."
+					"like eat souls and fight with mushrooms. Because obviously that's how this all works."
 
 	def warrior(self):
 		self.hp = 125
@@ -176,9 +176,9 @@ class Player:
 		self.warrior = True
 
 		description = "You're an all-around cool dude warrior, well-loved by everyone. " \
-							"You were the bomb back in high school, voted most likely to be successful for 3 years, but " \
-							"you followed your dreams and now you bake for a living. " \
-							"However, all of your pastries are so bad they're basically weapons. At least you're happy."
+					"You were the bomb back in high school, voted most likely to be successful for 3 years, but " \
+					"you followed your dreams and now you bake for a living. " \
+					"However, all of your pastries are so bad they're basically weapons. At least you're happy."
 
 	def thief(self):
 		self.hp = 100
@@ -187,8 +187,8 @@ class Player:
 		self.thief = True
 
 		description = "You're a thief, but not a very good one. No one has any clue who you are or where you came from. "\
-							"You seem like a nice person at first, but everyone has an inherent distrust of you. "\
-							"You've had to resort to stealing anything you can get your hands on, even if that person is "\
-							"completely aware of you."
+					"You seem like a nice person at first, but everyone has an inherent distrust of you. "\
+					"You've had to resort to stealing anything you can get your hands on, even if that person is "\
+					"completely aware of you."
 
 			

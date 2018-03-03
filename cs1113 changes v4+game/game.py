@@ -173,6 +173,7 @@ def handle_input(verb, noun1, noun2):
 		else:
 			return "If you want to attack 'with' a weapon, please equip it first."
 		return "I'm not sure what you're trying to attack."
+	
 	elif(verb == 'buy'):
 		for npc in world.tile_at(player.x, player.y).npcs:
 			for good in npc.goods:

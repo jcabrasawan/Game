@@ -123,17 +123,19 @@ class VillageWall(Barrier):
         return "There's a tall, smooth stone wall to the %s. It reminds you of a medieval castle's battlements." % self.direction
 
 class BrokenDownWall(Barrier):
+	name = 'Broken Wall'
     def description(self):
         return "There's a worn down section of the stone wall. It looks climbable for a healthy person."
     
-    def handle_input(self, verb, player.hp)
-        if(verb == 'climb'):
-            if(player.hp >= 50):
-                self.passable = True
-                return [True, 'You scale the wall, with some difficulty', player.hp]
-            else:
-                self.passable = False
-                return [False, "You're too injured to climb the wall.", player.hp]
+    def handle_input(self, verb, noun1, player.hp)
+        if(noun1 == 'broken wall' or noun1 == 'wall'):
+			if(verb == 'climb'):
+				if(player.hp >= 50):
+					self.passable = True
+					return [True, 'You scale the wall, with some difficulty', player.hp]
+				else:
+					self.passable = False
+					return [False, "You're too injured to climb the wall.", player.hp]
     
 class BigWoodenDoor(Barrier):
     
