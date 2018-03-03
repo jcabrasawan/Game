@@ -84,6 +84,8 @@ class Player:
 				has_weapon = True
 		if not has_weapon:
 			self.weapon = None	# Drop the equipped item if it is no longer in inventory.
+		self.update_class()	
+			
 			
 	def heal(self, amount):
 		self.hp += amount
@@ -141,6 +143,7 @@ class Player:
 							return [True, "You have unequipped your %s." % item.name]
 			return [True, "That does not appear to be equipped right now."]
 		return [False, ""]
+		
 
 	def update_class(self):
 		for item in self.inventory:

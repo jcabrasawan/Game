@@ -130,14 +130,14 @@ class Rock(Enemy):
 		self.hp = 80
 		self.damage = 15
 		
-class VillagerRage(Ememy):
-        def __init__(self):
-                self.name = "Enraged Villager"
-                self.hp = 120
-                self.damage = 15
+class VillagerRage(Enemy):
+	def __init__(self):
+		self.name = "Enraged Villager"
+		self.hp = 120
+		self.damage = 15
 
-class VillagerSouless(Ememy):
-        def __init__(self):
-                self.name = "Souless Villager"
-                self.hp = 100
-                self.damage = 20
+class VillagerSouless(Enemy):
+	def __init__(self):
+		self.name = "Souless Villager"
+		self.hp = 100
+		self.damage = 20

@@ -1,3 +1,4 @@
+import player
 class Barrier:
 	name = None
 	passable = False
@@ -21,8 +22,8 @@ class Barrier:
 	def description(self):
 		raise NotImplementedError("Create a subclass instead!")
 		
-	def handle_input(self, verb, noun1, noun2, inventory, player.hp):
-		return [False, None, inventory, player.hp]
+	def handle_input(self, verb, noun1, noun2, inventory, hp):
+		return [False, None, inventory, hp]
 		
 class ImpliedWall(Barrier):
 	def description(self):
@@ -40,7 +41,7 @@ class WoodenDoor(Barrier):
 		else:
 			return "An old wooden door lies open before you to the %s." % self.direction
 		
-	def handle_input(self, verb, noun1, noun2, inventory):
+	def handle_input(self, verb, noun1, noun2, inventory, hp):
 		if(noun1 == 'door' or noun1 == 'wooden door'):
 			if(verb == 'check'):
 				return [True, self.description(), inventory]
@@ -78,7 +79,7 @@ class LockedDoor(Barrier):
 		else:
 			return "An imposing door lies open before you to the %s." % self.direction
 		
-	def handle_input(self, verb, noun1, noun2, inventory):
+	def handle_input(self, verb, noun1, noun2, inventory, hp):
 		if(noun1 == 'door' or noun1 == 'locked door'):
 			if(verb == 'check'):
 				return [True, self.description(), inventory]
@@ -126,7 +127,7 @@ class BrokenDownWall(Barrier):
     def description(self):
         return "There's a worn down section of the stone wall. It looks climbable for a healthy person."
     
-    def handle_input(self, verb, player.hp)
+    def handle_input(self, verb, noun1, noun2, inventory, hp):
         if(verb == 'climb'):
             if(player.hp >= 50):
                 self.passable = True
@@ -135,8 +136,7 @@ class BrokenDownWall(Barrier):
                 self.passable = False
                 return [False, "You're too injured to climb the wall.", player.hp]
     
-class BigWoodenDoor(Barrier):
-    
-class 
+#class BigWoodenDoor(Barrier):
+ 
     
     

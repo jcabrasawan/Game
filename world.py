@@ -1,7 +1,7 @@
 import items
 import enemies
 import barriers
-import npcs
+import npc
 
 from random import randint 	# Used to generate random integers.
 
