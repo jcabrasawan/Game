@@ -301,22 +301,23 @@ class ForestPathtoS(MapTile):
 class ForestPathNS(MapTile):
 	description = "You're on a small path surrounded by tall trees running north-south."
 class ForestPath(MapTile):
-	description = "You're on a small path surrounded by tall trees running east-west. You can see a break in the trees to your left."
+	description = "You're on a small path surrounded by tall trees with %s."
 
 class Clearing(MapTile):
 	description = "It's a small clearing."
 	
 class House(MapTile):
 	description = "TODO House"
+
 class Door(MapTile):
 	description = "TODO Door"
 		
 class World:									# I choose to define the world as a class. This makes it more straightforward to import into the game.
 	map = [
-		[Start(barriers.ImpliedWall('n'), barriers.ImpliedWall('s'), barriers.ImpliedWall('e'), barriers.ImpliedWall('w'))]\
-		[Village(),  Village(),  Village(),  ForestR(),   ForestPathN(barriers.ImpliedWall('n')),   Forest(barriers.ImpliedWall('n')),   Clearing(barriers.ImpliedWall('n')), Clearing(barriers.ImpliedWall('n')), Forest(barriers.ImpliedWall('n')), Forest(barriers.ImpliedWall('e'), barriers.ImpliedWall('n'),barriers.ImpliedWall('s'))],
-		[House(barriers.ImpliedWall('n'), barriers.ImpliedWall('s'), barriers.ImpliedWall('w')),  Door(),  Village(),  Village(),  ForestPath(), ForestPathtoS(),   ForestPathM(), Clearing(), Forest(barriers.ImpliedWall('e'))],
-		[ForestL(barriers.ImpliedWall('w'), barriers.ImpliedWall('s')),  Village(barriers.ImpliedWall('s')),  Village(barriers.ImpliedWall('s')),  Village(barriers.ImpliedWall('s')),  ForestR(barriers.ImpliedWall('s')), ForestPathNS(barriers.ImpliedWall('s')), Forest(barriers.ImpliedWall('s')),   Forest(barriers.ImpliedWall('e'), barriers.ImpliedWall(('s"')))],
+		[Start(barriers.ImpliedWall('n'), barriers.ImpliedWall('s'), barriers.ImpliedWall('e'), barriers.ImpliedWall('w'))],
+		[Village(),  Village(),  Village(),  ForestR(),   ForestPath(barriers.ImpliedWall('n')),   Forest(barriers.ImpliedWall('n')),   Clearing(barriers.ImpliedWall('n')), Clearing(barriers.ImpliedWall('n')), Forest(barriers.ImpliedWall('n')), Forest(barriers.ImpliedWall('e'), barriers.ImpliedWall('n'),barriers.ImpliedWall('s'))],
+		[House(barriers.ImpliedWall('n'), barriers.ImpliedWall('s'), barriers.ImpliedWall('w')),  Door(),  Village(),  Village(),  ForestPath(), ForestPath(),   ForestPath(), Clearing(), Forest(barriers.ImpliedWall('e'))],
+		[ForestL(barriers.ImpliedWall('w'), barriers.ImpliedWall('s')),  Village(barriers.ImpliedWall('s')),  Village(barriers.ImpliedWall('s')),  Village(barriers.ImpliedWall('s')),  Forest(barriers.ImpliedWall('s')), ForestPath(barriers.ImpliedWall('s')), Forest(barriers.ImpliedWall('s')),   Forest(barriers.ImpliedWall('e'), barriers.ImpliedWall(('s"')))],
 		]
 
 	def __init__(self):
