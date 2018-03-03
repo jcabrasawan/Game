@@ -313,11 +313,10 @@ class Door(MapTile):
 		
 class World:									# I choose to define the world as a class. This makes it more straightforward to import into the game.
 	map = [
-		[None,  None,   None, None,  None,   None, None,  None,   None, None,  None,   None, None],
-		[None,  Start(),	None,   None,   None,   None,   None,   None,   None,   None,   None,   None,   None],
-		[None,  Blank(),	Blank(),	Village(),  Village(),  Village(),  ForestR(),   ForestPathN(),   Forest(),   Clearing(), Clearing(), Forest(),  None],
-		[None,  House(),  Door(),  Village(),  Village(),  ForestPath(), ForestPathtoS(),   ForestPathM(), Clearing(), Clearing(), Forest(), Forest(),  None],
-		[None,  ForestL(),  Village(),  Village(),  Village(),  ForestR(), ForestPathNS(), Forest(),   Forest(),   Forest(),   Forest(), Forest(),   None],
+		[Start(barriers.ImpliedWall('n'), barriers.ImpliedWall('s'), barriers.ImpliedWall('e'), barriers.ImpliedWall('w'))]\
+		[Village(),  Village(),  Village(),  ForestR(),   ForestPathN(barriers.ImpliedWall('n')),   Forest(barriers.ImpliedWall('n')),   Clearing(barriers.ImpliedWall('n')), Clearing(barriers.ImpliedWall('n')), Forest(barriers.ImpliedWall('n')), Forest(barriers.ImpliedWall('e'), barriers.ImpliedWall('n'),barriers.ImpliedWall('s'))],
+		[House(barriers.ImpliedWall('n'), barriers.ImpliedWall('s'), barriers.ImpliedWall('w')),  Door(),  Village(),  Village(),  ForestPath(), ForestPathtoS(),   ForestPathM(), Clearing(), Forest(barriers.ImpliedWall('e'))],
+		[ForestL(barriers.ImpliedWall('w'), barriers.ImpliedWall('s')),  Village(barriers.ImpliedWall('s')),  Village(barriers.ImpliedWall('s')),  Village(barriers.ImpliedWall('s')),  ForestR(barriers.ImpliedWall('s')), ForestPathNS(barriers.ImpliedWall('s')), Forest(barriers.ImpliedWall('s')),   Forest(barriers.ImpliedWall('e'), barriers.ImpliedWall(('s"')))],
 		]
 
 	def __init__(self):
