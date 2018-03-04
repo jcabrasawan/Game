@@ -31,14 +31,14 @@ class NPC:
 
 
 class OldMan(NPC):
-	name = "Old Man"
-	goods = [items.Dagger(), items.Red_Potion(value = 50), items.Crusty_Bread(value = 5)]
-	quantities = [1, -1, 2]		# Set quantity to -1 if you want it to be infinite.
+	name = "Merchant"
+	goods = [items.Green_Potion(value=15), items.Red_Potion(value = 15), items.Crusty_Bread(value = 5)]
+	quantities = [-1, -1, 2]		# Set quantity to -1 if you want it to be infinite.
 	
-	description = "An old man in a red robe is standing in the middle of the room."
+	description = "This man looks like he has the stuff. You want it."
 	
 	def talk(self):		# Add to this method if you want to be able to talk to your NPC.
-		print("The old man says: I can sell you an item or two, if you are interested:")
+		print("The money man says: I can sell the stuffs, if you are interested:")
 		for item in self.goods:
 			if item.value > 0:
 				if(self.quantities[self.goods.index(item)] > 0):
@@ -63,11 +63,11 @@ class OldMan(NPC):
 	def first_time(self):		# Used to have your NPC do something different the first time you see them.
 		self.first_encounter = False
 		text = self.description
-		text += " As he holds out a dagger, he says: 'It is dangerous to go alone... take this.'"
+		text += " You look like a turtle."
 		return text
 		
 	def handle_input(self, verb, noun1, noun2, player):
-		if(noun1 == 'old man' or noun1 == 'man'):
+		if(noun1 == 'merchant' or noun1 == 'money man' or noun1=="man"):
 			if(verb == 'check'):
 				return [True, self.check_text(), player]
 			elif(verb == 'talk'):
@@ -78,7 +78,48 @@ class OldMan(NPC):
 				if(good.name.lower() == noun1):
 					if(good.value == 0):
 						player.inventory = self.give(good, player.inventory)
-						return [True, "The old man gave you the %s." % good.name, player]
+						return [True, "The merchant threw the %s at you." % good.name, player]
 					else:
 						return [True, "'Hey, what are you trying to pull? If you want that, the cost is %d gold.'" % good.value, player]
 		return [False, "", player]
+
+class Villager_basic(NPC):
+	name: "Villager"
+	goods= [items.Shroom(value=1000)]
+	quantities=[1]
+
+	description: "Just your generic, nondescript connoiseur of rare pepes. Likes posting pictures of thier Starbucks Coffee on Instagram while dabbing."
+
+	def talk(self):
+		print("oh shit waddup?")
+	
+	def give(self, item, inventory):
+		for good in self.goods:
+			if(good == item):
+				inventory.append(good)
+				if(self.quantities[self.goods.index(good)] > 0):
+					self.quantities[self.goods.index(good)] -= 1
+		for index in reversed(range(len(self.quantities))):	# Get rid of items with zero quantity.
+			if(self.quantities[index] == 0):
+				self.quantities.pop(index)
+				self.goods.pop(index)
+		return inventory
+
+	
+	def handle_input(self, verb, noun1, noun2, player):
+		if(noun1 == 'villager' or noun1 == 'meme' or noun1=="memelord"):
+			if(verb == 'check'):
+				return [True, self.check_text(), player]
+			elif(verb == 'talk'):
+				text = self.talk()
+				return [True, text, player]
+		elif(verb == 'take'):
+			for good in self.goods:
+				if(good.name.lower() == noun1):
+					if(good.value == 0):
+						player.inventory = self.give(good, player.inventory)
+						return [True, "the meme one handed you the %s" % good.name, player]
+					else:
+						return [True, "'dude, that's not very lit. if you want it, you gotta give me %d gold. *dab*'" % good.value, player]
+		return [False, "", player]	
+
