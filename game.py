@@ -22,7 +22,9 @@ To toggle output from the game parser, type 'debug'. To exit the game at any tim
 player = Player()
 world = World()
 	
-def play():	
+def play():
+	global player
+	global world
 	print_welcome_text()
 	
 	print_wrap(world.tile_at(player.x,player.y).intro_text())
@@ -67,6 +69,9 @@ def play():
 		
 def handle_input(verb, noun1, noun2):
 	global debug_mode
+	global player
+	global world
+	
 	if(verb == 'help'):
 		if(not noun1):
 			return help_text
@@ -196,9 +201,9 @@ def handle_input(verb, noun1, noun2):
 		if(status):
 			return description
 		else:
-			[status, description, inventory] = world.tile_at(player.x, player.y).handle_input(verb, noun1, noun2, player.inventory)
+			[status, description, player_returned] = world.tile_at(player.x, player.y).handle_input(verb, noun1, noun2, player)
 			if(status):
-				player.inventory = inventory
+				player = player_returned
 				return description
 			else:
 				return "I'm not sure what you are trying to %s." % verb

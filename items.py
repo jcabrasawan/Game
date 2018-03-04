@@ -3,6 +3,7 @@ from random import randint 	# Used to generate random integers.
 
 class Item:
 	name = "Do not create raw Item objects!"
+	synonyms = []
 	
 	description = "You should define a description for items in their subclass."
 	dropped_description = "You should define the description for this item after it is dropped in its subclass."
@@ -39,8 +40,8 @@ class Item:
 	def pick_up(self):
 		self.is_dropped = False
 		
-	def handle_input(self, verb, noun1, noun2, inventory):
-		return [False, None, inventory]
+	def handle_input(self, verb, noun1, noun2, player):
+		return [False, None, player]
 		
 		
 class Iron_Key(Item):
@@ -200,8 +201,8 @@ class Container:
 			else:
 				return "The %s is empty." % self.name
 		
-	def handle_input(self, verb, noun1, noun2, inventory):			
-		return [False, "", inventory]
+	def handle_input(self, verb, noun1, noun2, player):			
+		return [False, "", player]
 
 		
 class Old_Chest(Container):
@@ -209,22 +210,22 @@ class Old_Chest(Container):
 	closed_description = "A battered old chest sits against the far wall, its lid shut tightly."
 	open_description = "A battered old chest sits against the far wall, its lid open wide."
 	
-	def handle_input(self, verb, noun1, noun2, inventory):
+	def handle_input(self, verb, noun1, noun2, player):
 		if(noun1 == self.name):
 			if(verb == 'check'):
-				return [True, self.check_text(), inventory]
+				return [True, self.check_text(), player]
 			if(verb == 'open'):
 				if(self.closed == True):
 					self.closed = False
-					return [True, "You pry the lid of the battered old chest open.", inventory]
+					return [True, "You pry the lid of the battered old chest open.", player]
 				else:
-					return [True, "The old chest is already wide open.", inventory]
+					return [True, "The old chest is already wide open.", player]
 			if(verb == 'close'):
 				if(self.closed == False):
 					self.closed = True
-					return [True, "You push down the lid of the old chest and it closes with a bang.", inventory]
+					return [True, "You push down the lid of the old chest and it closes with a bang.", player]
 				else:
-					return [True, "The old chest is already closed.", inventory]
+					return [True, "The old chest is already closed.", player]
 		elif(noun1):
 			if(verb == 'take'):
 				if(not self.closed):
@@ -234,38 +235,40 @@ class Old_Chest(Container):
 								pickup_text = "You took the %s from the old chest and added it to your inventory." % self.contents[index].name
 								inventory.append(self.contents[index])
 								self.contents.pop(index)
-								return [True, pickup_text, inventory]
+								return [True, pickup_text, player]
 							else:
-								return [True, "The %s is too heavy to pick up." % self.contents[index].name, inventory]
+								return [True, "The %s is too heavy to pick up." % self.contents[index].name, player]
 			if(verb == 'check'):
 				if(not self.closed):
 					for index in range(len(self.contents)):
 						if(self.contents[index].name.lower() == noun1):
 							if(isinstance(self.contents[index], Item)):
-								return [True, self.contents[index].check_text(), inventory]
-		return [False, None, inventory]
+								return [True, self.contents[index].check_text(), player]
+		return [False, None, player]
 		
 class Class(Item):
 	define_description = "Flavor text in subclass"
 	healing_value = 0
 	
-	#player.update_class()
 	
 	def teleport(self):
 		pass
 		
 class Toy_Skull(Class):
 	name = "Toy Skull"
+	synonyms = ['skull']
 	
 	description = "A small toy skull that looks scarily realistic."
 	
 		
 class Fluffy_Blanket(Class):
 	name = "Baby Blanket"
+	synonyms = ['fluffy blanket', 'blanket']
 	
 	description = "A tiny blanket that looks like it would only cover your feet."
 		
 class Ancient_Coin(Class):
 	name = "Antique Coin"
+	synonyms = ['coin', 'ancient coin']
 	
 	description = "An antique brittle coin. It doesn't look valuable."

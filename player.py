@@ -17,9 +17,9 @@ class Player:
 		self.x = 0
 		self.y = 0
 		
-		mage = False
-		warrior = False
-		thief = False
+		is_mage = False
+		is_warrior = False
+		is_thief = False
 
 	def print_inventory(self):
 		print("Inventory:")
@@ -148,23 +148,26 @@ class Player:
 	def update_class(self):
 		for item in self.inventory:
 			if(isinstance(item, items.Toy_Skull)):
+				self.inventory.pop(self.inventory.index(item))
 				print("You have now become a Mage.")
 				self.mage()
 			elif(isinstance(item, items.Fluffy_Blanket)):
-				print("You have now become a Warror.")
+				self.inventory.pop(self.inventory.index(item))
+				print("You have now become a Warrior.")
 				self.warrior()
 			elif(isinstance(item, items.Ancient_Coin)):
+				self.inventory.pop(self.inventory.index(item))
 				print("You have now become a Thief.")
 				self.thief()								
 			else: 
 				pass
-	   
+				
 	def mage(self):
 		self.hp = 75
 		self.max_hp = 100
 		self.mp = 75
 		self.carry = 25
-		self.mage = True   
+		self.is_mage = True   
 
 		description = "You can do all sorts of mage-like things now " \
 					"like eat souls and fight with mushrooms. Because obviously that's how this all works."
@@ -175,7 +178,7 @@ class Player:
 		self.max_hp = 150
 		self.mp = 0
 		self.carry = 20
-		self.warrior = True
+		self.is_warrior = True
 
 		description = "You're an all-around cool dude warrior, well-loved by everyone. " \
 					"You were the bomb back in high school, voted most likely to be successful for 3 years, but " \
@@ -188,7 +191,7 @@ class Player:
 		self.max_hp = 150
 		self.mp = 0
 		self.carry = 50
-		self.thief = True
+		self.is_thief = True
 
 		description = "You're a thief, but not a very good one. No one has any clue who you are or where you came from. "\
 					"You seem like a nice person at first, but everyone has an inherent distrust of you. "\

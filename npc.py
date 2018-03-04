@@ -26,8 +26,8 @@ class NPC:
 		self.first_encounter = False
 		return self.description
 		
-	def handle_input(self, verb, noun1, noun2, inventory):
-		return [False, None, inventory]
+	def handle_input(self, verb, noun1, noun2, player):
+		return [False, None, player]
 
 
 class OldMan(NPC):
@@ -66,19 +66,19 @@ class OldMan(NPC):
 		text += " As he holds out a dagger, he says: 'It is dangerous to go alone... take this.'"
 		return text
 		
-	def handle_input(self, verb, noun1, noun2, inventory):
+	def handle_input(self, verb, noun1, noun2, player):
 		if(noun1 == 'old man' or noun1 == 'man'):
 			if(verb == 'check'):
-				return [True, self.check_text(), inventory]
+				return [True, self.check_text(), player]
 			elif(verb == 'talk'):
 				text = self.talk()
-				return [True, text, inventory]
+				return [True, text, player]
 		elif(verb == 'take'):
 			for good in self.goods:
 				if(good.name.lower() == noun1):
 					if(good.value == 0):
-						inventory = self.give(good, inventory)
-						return [True, "The old man gave you the %s." % good.name, inventory]
+						player.inventory = self.give(good, player.inventory)
+						return [True, "The old man gave you the %s." % good.name, player]
 					else:
-						return [True, "'Hey, what are you trying to pull? If you want that, the cost is %d gold.'" % good.value, inventory]
-		return [False, "", inventory]
+						return [True, "'Hey, what are you trying to pull? If you want that, the cost is %d gold.'" % good.value, player]
+		return [False, "", player]
