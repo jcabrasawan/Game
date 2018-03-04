@@ -292,16 +292,29 @@ class ForestL(MapTile):
 class ForestR(MapTile):
 	description = "You're surrounded by tall trees. You can hear muffled chatter through the trees to the west."
 
-class ForestPathN(MapTile):
-	description = "You're on a small path surrounded by tall trees that travels south. It doesn't seem to be well-traveled."
-class ForestPathM(MapTile):
-	description = "You're on a small path surrounded by tall trees with branches lying to the west, east, and north. It doesn't seem to be well-traveled."
-class ForestPathtoS(MapTile):
-	description = "You're on a small path surrounded by tall trees running east-west with a clear path south. It doesn't seem to be well-traveled."
-class ForestPathNS(MapTile):
-	description = "You're on a small path surrounded by tall trees running north-south."
 class ForestPath(MapTile):
 	description = "You're on a small path surrounded by tall trees with %s."
+
+	def intro_text(self):	# Since this tile appears so much, I gave it its own intro_text function to make its text more descriptive.
+		text = self.description
+			
+		directions_clear = ['north', 'south', 'east', 'west']
+		for barrier in self.barriers:
+			try:
+				directions_clear.pop(directions_clear.index(barrier.direction))		# Attempt to remove the barrier's direction from the list of clear directions.
+			except:
+				pass		# If the barrier direction is not in the list of clear directions already, then we ignore it.
+		#for enemy in self.contents['enemies']:
+		#	text += " " + enemy.description()
+		
+		if(len(directions_clear) == 1):
+			text += " There is a clear pathway leading to the %s." % directions_clear[0]
+		elif(len(directions_clear) == 2):
+			text += " There are clear pathways leading to the %s and %s." % (directions_clear[0], directions_clear[1])
+		elif(len(directions_clear) == 3):
+			text += " There are clear pathways leading to the %s, %s, and %s." % (directions_clear[0], directions_clear[1], directions_clear[2])
+		elif(len(directions_clear) == 4):
+			text += " It appears that your path is clear in all directions." 
 
 class Clearing(MapTile):
 	description = "It's a small clearing."
@@ -317,7 +330,7 @@ class World:									# I choose to define the world as a class. This makes it mo
 		[Start(barriers = [barriers.Wall('e'), barriers.Wall('s'), barriers.Wall('w')])],
 		[Village(),  Village(),  Village(),  ForestR(),   ForestPath(),   Forest(),   Clearing(), Clearing(), Forest(), Forest()],
 		[House(barriers = [barriers.Wall('n'), barriers.Wall('s')]),  Door(),  Village(),  Village(),  ForestPath(), ForestPath(),   ForestPath(), Clearing(), Forest()],
-		[ForestL(),  Village(),  Village(),  Village(),  Forest(), ForestPath(), Forest(),   Forest()],
+		[ForestL(),  Village(),  Village(),  Village(),  ForestR(), ForestPath(), Forest(),   Forest()],
 		]
 
 	def __init__(self):
