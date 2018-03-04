@@ -1,16 +1,3 @@
-class Enemy:
-	def __init__(self):
-		raise NotImplementedError("Do not create raw Enemy objects.")
-
-	def __str__(self):
-		return self.name
-
-	def is_alive(self):
-		return self.hp > 0
-		
-	def handle_input(self, verb, noun1, noun2, player):
-		return [False, None, player]
-
 import items
 
 class Enemy:
@@ -103,41 +90,60 @@ class RockMonster(Enemy):
 	damage = 15
 	loot = [items.Iron_Key("An old iron key lies on the ground near the remains of the Rock Monster.")]
 
-class Shroom(Enemy):
-	def __init__(self):
-		self.name = "Shroom"
-		self.hp = 10
-		self.damage = 2
 
 
-class Cactus(Enemy):
-	def __init__(self):
-		self.name = "Cactus"
-		self.hp = 30
-		self.damage = 10
 
+
+
+class ShroomG(Enemy):
+	name = "Green Shroom"
+	description = "It looks magical, with a cap that looks like a Starbucks Shamrock Shake."
+	hp = 10
+	damage = 3
+	loot = [items.Iron_Key("An old iron key lies on the ground near the remains of the Rock Monster.")]
+
+class ShroomP(Enemy):
+	name = "Pink Shroom"
+	description = "It looks magical, with a cap that looks like a 5-year-old girl's bedroom."
+	hp = 10
+	damage = 3
+	loot = [items.Iron_Key("An old iron key lies on the ground near the remains of the Rock Monster.")]
+
+class ShroomM(Enemy):
+	name = "Psychedelic Shroom"
+	description = "It looks magical, with a cap that looks like a hippie's t-shirt"
+	hp = 10
+	damage = 3
+	loot = [items.Iron_Key("An old iron key lies on the ground near the remains of the Rock Monster.")]
+
+#class Cactus(Enemy):
+#	def __init__(self):
+#		self.name = "Cactus"
+#		self.hp = 30
+#		self.damage = 10
 
 class ButterflyColony(Enemy):
-	def __init__(self):
-		self.name = "Colony of Butterflies"
-		self.hp = 100
-		self.damage = 4
+	name = "Colony of Butterflies"
+	description = ""
+	hp = 35
+	damage = 10
 
-
-class Rock(Enemy):
-	def __init__(self):
-		self.name = "Rock"
-		self.hp = 80
-		self.damage = 15
+#class Rock(Enemy):
+#	name = "Rock"
+#	description = ""
+#	hp = 80
+#	damage = 15
 		
 class VillagerRage(Enemy):
-	def __init__(self):
-		self.name = "Enraged Villager"
-		self.hp = 120
-		self.damage = 15
+	name = "Enraged Villager"
+	description = ""
+	hp = 120
+	damage = 7
+	loot = [items.Iron_Key("An old iron key lies on the ground near the remains of the Rock Monster.")]
 
 class VillagerSouless(Enemy):
-	def __init__(self):
-		self.name = "Souless Villager"
-		self.hp = 100
-		self.damage = 20
+	name = "Souless Villager"
+	description = ""
+	hp = 100
+	damage = 5
+	loot = [items.Iron_Key("An old iron key lies on the ground near the remains of the Rock Monster.")]
