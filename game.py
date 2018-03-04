@@ -16,6 +16,7 @@ or in some cases, [VERB][NOUN][OBJECT] (e.g. 'attack thief with nasty knife').\
 The game will ignore the articles 'a', 'an', and 'the' (e.g. 'open the door' is the same as 'open door.').\n\n\
 To toggle output from the game parser, type 'debug'. To exit the game at any time, type 'exit' or 'quit'."
 
+teleport_text = "With a puff of smoke you have teleported to another location!"
 		
 				
 
@@ -60,7 +61,12 @@ def play():
 			print("Something seems to have gone wrong. Please try again.")
 			
 		player.update_inventory()
-		world.update_rooms(player)
+		current_coordinates = [player.x, player.y]	# Store current player location to check for teleportation.
+		player = world.update_rooms(player)
+		if(current_coordinates != [player.x, player.y]):	# If we have teleported.
+			print()
+			print_wrap(teleport_text)
+			print_wrap(world.tile_at(player.x,player.y).intro_text())
 		
 		if(not player.is_alive()):
 			print_loss_text()

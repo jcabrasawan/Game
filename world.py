@@ -137,6 +137,7 @@ class MapTile:
 					agro_text += player.take_damage(enemy.damage)
 					print()
 					print(agro_text)
+		return player
 
 
 class StartTile(MapTile):
@@ -323,6 +324,10 @@ class Start(MapTile):
 		if(class_item_counter < 3):	#If a class item has been taken
 			self.item_taken = True
 			self.items = []
+			player.x = 0
+			player.y = 1
+		return player
+			
 					
 
 class Village(MapTile):
@@ -542,3 +547,4 @@ class World:									# I choose to define the world as a class. This makes it mo
 			for room in row:
 				if(room):
 					room.update(player)
+		return player
