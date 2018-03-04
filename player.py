@@ -150,7 +150,6 @@ class Player:
 			if(isinstance(item, items.Toy_Skull)):
 				print("You have now become a Mage.")
 				self.mage()
-				print(mage.description)
 			elif(isinstance(item, items.Fluffy_Blanket)):
 				print("You have now become a Warror.")
 				self.warrior()
