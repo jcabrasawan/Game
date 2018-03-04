@@ -59,6 +59,9 @@ class Consumable(Item):
 	def consume(self):
 		return [self.consume_description, self.healing_value]
 			
+class Shroom(Item):
+	name = 'Shroom'
+	description = "Carried by every villager. Doesn't do anything, at least you think. They get them from the Shroom House on the west side of town."
 
 class Crusty_Bread(Consumable):
 	name = "crusty bread"
@@ -66,18 +69,27 @@ class Crusty_Bread(Consumable):
 	
 	description = "Just a stale old piece of bread."
 	dropped_description = "A piece of crusty bread is lying on the ground."
-	consume_description = "You eat the crusty piece of bread."
+	consume_description = "You eat the crusty piece of bread. Your jaw aches."
 			
 class Red_Potion(Consumable):
 	name = "red potion"
-	healing_value = 75
+	healing_value = 50
 	
 	description = "A bottle of mysterious, glowing red potion. For some reason it looks healthy."
 	dropped_description = "A bottle of red potion is glowing on the ground."
-	consume_description = "You drink the glowing red potion."
+	consume_description = "You drink the glowing red potion. The world spins for a moment."
 	
-	
-	
+class Muffin(Consumable):
+	name = "Muffin"
+	description = 'A soft muffin. It looks tasty.'
+
+class Baguette(Consumable):
+	name = 'Baguette'
+	description = "A long stick of bread. You wonder if it's magical, but then you remember that you don't understand french, so you won't get that joke. (it isn't. but you can eat it.)"
+
+class Cupcake(Consumable):
+	name = 'Cupcake'
+	description = "A small cupcake. It doesn't look all that nutritious, but who would turn down a cupcake?"
 
 class Weapon(Item):	
 	equip_description = "You should define flavor text for equipping this item in its subclass."
@@ -90,8 +102,6 @@ class Weapon(Item):
 			
 	def attack(self):
 		return [self.attack_descriptions[randint(0, len(self.attack_descriptions)-1)], self.damage]		# Return damage and a random attack description from your list.
-		
-
 
 class Rock(Weapon):
 	name = "rock"
@@ -103,7 +113,6 @@ class Rock(Weapon):
 	
 	damage = 5
 
-
 class Dagger(Weapon):
 	name = "dagger"
 	
@@ -113,7 +122,6 @@ class Dagger(Weapon):
 	attack_descriptions = ["You lunge forward with the dagger.", "You stab wildly with the dagger.", "You swing the dagger at your foe."]
 	
 	damage = 10
-
 
 class Rusty_Sword(Weapon):
 	name = "rusty sword"
@@ -125,7 +133,33 @@ class Rusty_Sword(Weapon):
 	
 	damage = 20
 	
+
+class Green_Potion(Weapon):
+	name = 'Green Potion'
+	description = "A bright green potion. It looks volatile, so you feel you should handle it gently. (hint: equip)"
+
+class Pink_Potion(Weapon):
+	name = "Pink Potion"
+	description = "A bright pink potion. You take a sniff and are immediately enveloped in sparkles. You think any more exposure will cause you to die."
+
+class Multi_Potion(Weapon):
+	name = 'Tie-Die Potion'
+	description = "A tie-die potion. That's a pun, not a typo. Seems dangerous."
+	synonyms = ['tie-dye potion', 'tye-dye potion']
+
+class Old_Muffin(Weapon):
+	name = "Old Muffin"
+	description = "An old, stale muffin. It feels like it'd do the damage of a heavy rock. (hint: equip)"
+
+class Old_Baguette(Weapon):
+	name = 'Old Baguette'
+	description = "A long, stale baguette. It's hard enough to use as a bo staff. (hint: equip)"
+
+class Old_Cupcake(Weapon):
+	name = 'Old Cupcake'
+	description = "A stale cupcake. The icing looks rancid, and when you smell it you're immediately hit with debilitating nausea. (hint: equip)"
 	
+
 class Gold(Item):
 	value = 0		# Define this appropriately in your subclass.
 		
@@ -259,8 +293,7 @@ class Toy_Skull(Class):
 	synonyms = ['skull']
 	
 	description = "A small toy skull that looks scarily realistic."
-	
-		
+			
 class Fluffy_Blanket(Class):
 	name = "Baby Blanket"
 	synonyms = ['fluffy blanket', 'blanket']
