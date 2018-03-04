@@ -148,18 +148,15 @@ class Player:
 	def update_class(self):
 		for item in self.inventory:
 			if(isinstance(item, items.Toy_Skull)):
-				self.mage()
 				print("You have now become a Mage.")
+				self.mage()
 				print(mage.description)
 			elif(isinstance(item, items.Fluffy_Blanket)):
-				self.warrior()
 				print("You have now become a Warror.")
-				print(warrior.description)
+				self.warrior()
 			elif(isinstance(item, items.Ancient_Coin)):
-				self.thief()
 				print("You have now become a Thief.")
-				print(thief.description)
-				
+				self.thief()								
 			else: 
 				pass
 	   
@@ -172,6 +169,7 @@ class Player:
 
 		description = "You can do all sorts of mage-like things now " \
 					"like eat souls and fight with mushrooms. Because obviously that's how this all works."
+		print(description)
 
 	def warrior(self):
 		self.hp = 125
@@ -184,6 +182,7 @@ class Player:
 					"You were the bomb back in high school, voted most likely to be successful for 3 years, but " \
 					"you followed your dreams and now you bake for a living. " \
 					"However, all of your pastries are so bad they're basically weapons. At least you're happy."
+		print(description)
 
 	def thief(self):
 		self.hp = 100
@@ -196,5 +195,6 @@ class Player:
 					"You seem like a nice person at first, but everyone has an inherent distrust of you. "\
 					"You've had to resort to stealing anything you can get your hands on, even if that person is "\
 					"completely aware of you."
+		print(description)
   
          
