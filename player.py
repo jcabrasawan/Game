@@ -14,8 +14,8 @@ class Player:
 		self.mp = 0
 		self.carry = 0
 		
-		self.x = 1
-		self.y = 1
+		self.x = 0
+		self.y = 0
 		
 		mage = False
 		warrior = False
