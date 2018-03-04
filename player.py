@@ -165,6 +165,7 @@ class Player:
 	   
 	def mage(self):
 		self.hp = 75
+		self.max_hp = 100
 		self.mp = 75
 		self.carry = 25
 		self.mage = True   
@@ -174,6 +175,7 @@ class Player:
 
 	def warrior(self):
 		self.hp = 125
+		self.max_hp = 150
 		self.mp = 0
 		self.carry = 20
 		self.warrior = True
@@ -185,6 +187,7 @@ class Player:
 
 	def thief(self):
 		self.hp = 100
+		self.max_hp = 150
 		self.mp = 0
 		self.carry = 50
 		self.thief = True
