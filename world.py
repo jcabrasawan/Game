@@ -309,11 +309,12 @@ class Start(MapTile):
 		if(self.x == player.x and self.y == player.y):
 			for enemy in self.enemies:
 				if(enemy.agro):
-					agro_text = "The %s seems very aggitated. It attacks! " % enemy.name
+					agro_text = "The %s seems very agitated. It attacks! " % enemy.name
 					agro_text += player.take_damage(enemy.damage)
 					print()
 					print(agro_text)
 		class_item_counter = 0
+		
 		for item in self.items:
 			if(isinstance(item, items.Class)):
 				class_item_counter += 1
@@ -323,16 +324,41 @@ class Start(MapTile):
 			player.x = 0
 			player.y = 1
 		return player
+		
 			
 					
 
-class Village(MapTile):
+class VillageNW(MapTile):
    
-	description = "It's a small village with plenty of friendly villagers."
+	description = "It's a small village with plenty of friendly villagers. The village expands before you to the southeast."
 
-class Blank(MapTile):
-	
-	description = "CONSTRUCTION TILE FOR GMs"
+class VillageN(MapTile):
+   
+	description = "It's a small village with plenty of friendly villagers. The village expands before you to the south."
+
+class VillageNE(MapTile):
+   
+	description = "It's a small village with plenty of friendly villagers. The village expands before you to the southwest."
+
+class VillageCenter(MapTile):
+   
+	description = "It's a small village with plenty of friendly villagers. The village extends in all directions."
+
+class VillageE(MapTile):
+   
+	description = "It's a small village with plenty of friendly villagers. The village expands before you to the west."
+
+class VillageSW(MapTile):
+   
+	description = "It's a small village with plenty of friendly villagers. The village expands before you to the northeast."
+
+class VillageS(MapTile):
+   
+	description = "It's a small village with plenty of friendly villagers. The village expands before you to the north."
+
+class VillageSE(MapTile):
+   
+	description = "It's a small village with plenty of friendly villagers. The village expands before you to the northwest."
 
 class Forest(MapTile):
 	
@@ -381,9 +407,9 @@ class Door(MapTile):
 class World:									# I choose to define the world as a class. This makes it more straightforward to import into the game.
 	map = [
 		[Start(barriers = [barriers.Wall('e'), barriers.Wall('s'), barriers.Wall('w')])],
-		[Village(),  Village(),  Village(),  ForestR(),   ForestPath(),   Forest(),   Clearing(), Clearing(), Forest(), Forest()],
-		[House(barriers = [barriers.Wall('n'), barriers.Wall('s')]),  Door(),  Village(),  Village(),  ForestPath(), ForestPath(),   ForestPath(), Clearing(), Forest()],
-		[ForestL(),  Village(),  Village(),  Village(),  ForestR(), ForestPath(), Forest(),   Forest()],
+		[VillageNW(barriers = [barriers.Wall('s'), barriers.Wall('n')]),	VillageN(),  											VillageNE(),	ForestR(),		ForestPath(),  														Forest(),															Clearing(),									Clearing()],
+		[House(barriers = [barriers.Wall('n'), barriers.Wall('s')]),		VillageCenter(barriers = [barriers.WoodenDoor('w')]),	VillageE(),		ForestPath(),	ForestPath(barriers = [barriers.Wall('s')]),   						ForestPath(barriers = [barriers.Wall('n')]),						Clearing(), 								Clearing()],
+		[VillageSW(),														VillageS(),												VillageSE(),	ForestR(),		ForestPath(barriers = [barriers.Wall('w'), barriers.Wall('e')]),	Forest(barriers = [barriers.Wall('w')]),							Forest(),									Forest()],
 		]
 
 	def __init__(self):
