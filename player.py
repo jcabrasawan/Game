@@ -2,7 +2,7 @@ import items
 #testing git
 class Player:
 	def __init__(self):
-		self.inventory = [items.Crusty_Bread()]
+		self.inventory = [items.Crusty_Bread(), items.Green_Potion(), items.Old_Cupcake()]
 						
 		self.weapon = None
 		

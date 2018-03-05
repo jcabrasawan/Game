@@ -80,16 +80,30 @@ class Red_Potion(Consumable):
 	consume_description = "You drink the glowing red potion. The world spins for a moment."
 	
 class Muffin(Consumable):
-	name = "Muffin"
+	name = "Soft Muffin"
+	synonyms = ['tasty muffin']
+	healing_value = 30
+	
 	description = 'A soft muffin. It looks tasty.'
+	dropped_description = "A muffin is sitting sadly on the ground."
+	consume_description = "You ate the muffin. It's quite good."
 
 class Baguette(Consumable):
-	name = 'Baguette'
-	description = "A long stick of bread. You wonder if it's magical, but then you remember that you don't understand french, so you won't get that joke. (it isn't. but you can eat it.)"
+	name = 'Crunchy Baguette'
+	synonyms = ['long baguette']
+	healing_value = 45
+
+	description = "A long baguette. You wonder if it's magical, but then you remember that you don't understand French, so you won't get that joke. (it isn't. but you can eat it.)"
+	dropped_description = "A crunchy baguette is lying on the ground. It looks tempting."
+	consume_description = "You ate the baguette. It took awhile, because, you know, it's a big piece of bread."
 
 class Cupcake(Consumable):
-	name = 'Cupcake'
+	name = 'Small Cupcake'
+	healing_value = 10
+
 	description = "A small cupcake. It doesn't look all that nutritious, but who would turn down a cupcake?"
+	dropped_description = "A cupcake is lying on the ground, its frosting smushed."
+	consume_description = "You ate the cupcake. You feel a little sick from the sweetness."
 
 class Weapon(Item):	
 	equip_description = "You should define flavor text for equipping this item in its subclass."
@@ -131,34 +145,73 @@ class Rusty_Sword(Weapon):
 	equip_description = "You arm yourself with the rusty sword."
 	attack_descriptions = ["You slash with your rusty sword.", "Your rusty sword connects mightily with your enemy.", "You swing the rusty sword with all your might."]
 	
-	damage = 20
+	damage = 15
 	
 
 class Green_Potion(Weapon):
 	name = 'Green Potion'
+
 	description = "A bright green potion. It looks volatile, so you feel you should handle it gently. (hint: equip)"
+	dropped_description = "A bright green potion lies on the ground, pulsing with light."
+	equip_description = "You unstopper the Green Potion and hold it carefully."
+	attack_descriptions = ["You throw some potion on the enemy.", 'You swing the ever-full bottle at your enemy.', 'You splash the potion everywhere.']
+
+	damage = 20
 
 class Pink_Potion(Weapon):
 	name = "Pink Potion"
+
 	description = "A bright pink potion. You take a sniff and are immediately enveloped in sparkles. You think any more exposure will cause you to die."
+	dropped_description ="A bright pink potion lies on the ground, pulsing with light."
+	equip_description = "You unstopper the Pink Potion and hold it carefully."
+	attack_descriptions = attack_descriptions = ["You throw some potion on the enemy.", 'You swing the ever-full bottle at your enemy.', 'You splash the potion everywhere.']
+
+	damage = 20
 
 class Multi_Potion(Weapon):
 	name = 'Tie-Die Potion'
-	description = "A tie-die potion. That's a pun, not a typo. Seems dangerous."
 	synonyms = ['tie-dye potion', 'tye-dye potion']
+
+	description = "A tie-die potion. That's a pun, not a typo. Seems dangerous."
+	dropped_description = "A bright tie-die potion lies on the ground, pulsing with light."
+	equip_description = "You unstopper the Tie-Die Potion and hold it carefully."
+	attack_descriptions = attack_descriptions = ["You throw some potion on the enemy.", 'You swing the ever-full bottle at your enemy.', 'You splash the potion everywhere.']
+
+	damage = 30
+	
 
 class Old_Muffin(Weapon):
 	name = "Old Muffin"
+	synonyms = ['stale muffin']
+
 	description = "An old, stale muffin. It feels like it'd do the damage of a heavy rock. (hint: equip)"
+	dropped_description = "An old muffin lies on the ground."
+	equip_description = "You carefully hold the rock-like muffin in your hand."
+	attack_descriptions = ['You hit the enemy with the muffin', 'You swing viciously at it with a muffin.']
+
+	damage = 20
 
 class Old_Baguette(Weapon):
 	name = 'Old Baguette'
+	synonyms = ['stale baguette', 'long baguette']
+
 	description = "A long, stale baguette. It's hard enough to use as a bo staff. (hint: equip)"
+	dropped_description = "A stale baguette lies on the ground."
+	equip_description = "You arm yourself with the baguette as if it were a baseball bat, feeling mildly ridiculous."
+	attack_descriptions = ['You use your limited knowledge of wushu to attack the enemy.', 'You swing viciously at it, HOME RUN!']
+
+	damage = 20
 
 class Old_Cupcake(Weapon):
 	name = 'Old Cupcake'
+	synonyms = ['stale cupcake', 'rancid cupcake']
+
 	description = "A stale cupcake. The icing looks rancid, and when you smell it you're immediately hit with debilitating nausea. (hint: equip)"
-	
+	dropped_description = "A rancid cupcake lies on the ground, looking altogether disgusting."
+	equip_description = "You carefully handle the cupcake. You really need to wash your hand before eating anything."
+	attack_descriptions = ["You wave the cupcake in front of the enemy's face.","The smell of the cupcake offends the enemy, who isn't quite as used to it as you. You relate."]
+
+	damage = 30
 
 class Gold(Item):
 	value = 0		# Define this appropriately in your subclass.
