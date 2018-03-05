@@ -325,6 +325,7 @@ class Start(MapTile):
 			player.y = 1
 		return player
 		
+		#something wrong: since the count is always < 3 it will always tp back to 0,1 w/every update room
 			
 					
 

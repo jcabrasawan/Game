@@ -70,9 +70,7 @@ def play():
 				print_wrap(world.tile_at(player.x,player.y).intro_text())
 			else:
 				pass
-		else: 
-			print()
-			print_wrap(world.tile_at(player.x,player.y).intro_text())
+		
 		
 		if(not player.is_alive()):
 			print_loss_text()
