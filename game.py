@@ -64,8 +64,14 @@ def play():
 		current_coordinates = [player.x, player.y]	# Store current player location to check for teleportation.
 		player = world.update_rooms(player)
 		if(current_coordinates != [player.x, player.y]):	# If we have teleported.
+			if(current_coordinates == [0,0]):
+				print()
+				print_wrap(teleport_text)
+				print_wrap(world.tile_at(player.x,player.y).intro_text())
+			else:
+				pass
+		else: 
 			print()
-			print_wrap(teleport_text)
 			print_wrap(world.tile_at(player.x,player.y).intro_text())
 		
 		if(not player.is_alive()):

@@ -206,7 +206,6 @@ class Corridor(MapTile):
 		for item in self.items:
 			text += " " + item.room_text()
 		return text
-	
 		
 class StoreRoom(MapTile):
 	items = [items.Rusty_Sword("A rusty sword is propped against a shelf in the corner of the room."), \
@@ -224,8 +223,7 @@ class ExpanseSW(MapTile):
 			self.enemies = [enemies.BatColony()]
 		else:
 			self.enemies = []
-			
-	
+				
 class ExpanseSE(MapTile):
 	description = """You find yourself in an expansive cavern, with walls stretching out nearly as far as the eye can see. The room opens before you to the northwest. There is a small corridor leading to the east from here."""
 	
@@ -260,11 +258,9 @@ class Nook(MapTile):
 class Cave(MapTile):
 	npcs = [npc.OldMan()]
 	description = """You have entered a very dark portion of the cave. Two small fires, one on each side of the room, are glowing softly."""
-		
-		
+				
 class NearVictory(MapTile):
 	description = """You can see a light to the east at the end of this corridor. Could that be your way out?"""
-
 
 class VictoryTile(MapTile):
 	description = """You see a beast light in the distance...
@@ -284,16 +280,16 @@ class Start(MapTile):
 		
 		directions_blocked = []
 		
-		for enemy in self.enemies:
-			if (enemy.direction):
-				if(enemy.direction not in directions_blocked):
-					directions_blocked.append(enemy.direction)
-			text += " " + enemy.check_text()
-		for barrier in self.barriers:
-			if (barrier.direction):
-				if(barrier.direction not in directions_blocked):
-					if(barrier.verbose):
-						text += " " + barrier.description()
+		#for enemy in self.enemies:
+		#	if (enemy.direction):
+		#		if(enemy.direction not in directions_blocked):
+		#			directions_blocked.append(enemy.direction)
+		#	text += " " + enemy.check_text()
+		#for barrier in self.barriers:
+		#	if (barrier.direction):
+		#		if(barrier.direction not in directions_blocked):
+		#			if(barrier.verbose):
+		#				text += " " + barrier.description()
 		for npc in self.npcs:
 			text += " " + npc.check_text()
 		for item in self.items:
