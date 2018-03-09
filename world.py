@@ -11,6 +11,7 @@ class MapTile:
 	enemies = []
 	items = []
 	npcs = []
+	item_taken = False
 	
 	def __init__(self, x=0, y=0, barriers = [], items = [], enemies = [], npcs = []):
 		self.x = x
@@ -320,13 +321,10 @@ class Start(MapTile):
 				class_item_counter += 1
 		if(class_item_counter < 3):	#If a class item has been taken
 			self.item_taken = True
-			self.items = []
+			self.items = [items.Ancient_Coin(), items.Toy_Skull(), items.Fluffy_Blanket()]
 			player.x = 0
 			player.y = 1
 		return player
-		
-		#something wrong: since the count is always < 3 it will always tp back to 0,1 w/every update room
-			
 					
 
 class VillageNW(MapTile):
