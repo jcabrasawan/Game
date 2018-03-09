@@ -313,8 +313,8 @@ class Start(MapTile):
 					agro_text += player.take_damage(enemy.damage)
 					print()
 					print(agro_text)
-		class_item_counter = 0
 		
+		class_item_counter = 0
 		for item in self.items:
 			if(isinstance(item, items.Class)):
 				class_item_counter += 1
