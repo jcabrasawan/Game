@@ -323,7 +323,7 @@ class Start(MapTile):
 			self.item_taken = True
 			self.items = [items.Ancient_Coin(), items.Toy_Skull(), items.Fluffy_Blanket()]
 			player.x = 0
-			player.y = 1
+			player.y = 2
 		return player
 					
 
@@ -369,7 +369,7 @@ class ForestR(MapTile):
 	description = "You're surrounded by tall trees. You can hear muffled chatter through the trees to the west."
 
 class ForestPath(MapTile):
-	description = "You're on a small path surrounded by tall trees with %s."
+	description = "You're on a small path surrounded by tall trees." 
 
 	def intro_text(self):	# Since this tile appears so much, I gave it its own intro_text function to make its text more descriptive.
 		text = self.description
@@ -384,32 +384,42 @@ class ForestPath(MapTile):
 		#	text += " " + enemy.description()
 		
 		if(len(directions_clear) == 1):
-			text += " There is a clear pathway leading to the %s." % directions_clear[0]
+			text += " There is a path leading to the %s." % directions_clear[0]
 		elif(len(directions_clear) == 2):
-			text += " There are clear pathways leading to the %s and %s." % (directions_clear[0], directions_clear[1])
+			text += " There are small trails leading to the %s and %s." % (directions_clear[0], directions_clear[1])
 		elif(len(directions_clear) == 3):
-			text += " There are clear pathways leading to the %s, %s, and %s." % (directions_clear[0], directions_clear[1], directions_clear[2])
+			text += " There are small trails leading to the %s, %s, and %s." % (directions_clear[0], directions_clear[1], directions_clear[2])
 		elif(len(directions_clear) == 4):
-			text += " It appears that your path is clear in all directions." 
+			text += " It appears that the path is clear in all directions." 
 	
 
 
 class Clearing(MapTile):
+
 	description = "It's a small clearing."
+
+	def random_spawn(self):
+		if(randint(0,3) == 0):		# 1 in 4 odds.
+			self.enemies = [enemies.ShroomG() or enemies.ShroomM() or enemies.ShroomP()]
+		else:
+			self.enemies = []
+	
 	
 class House(MapTile):
-	description = "TODO House"
-
-class Door(MapTile):
-	description = "TODO Door"
+	description = "It's a warm, welcoming house. You wonder who it belongs to."
+	items = []
+	npcs = []
+	
 		
 class World:									# I choose to define the world as a class. This makes it more straightforward to import into the game.
 	map = [
 		[Start(barriers = [barriers.Wall('e'), barriers.Wall('s'), barriers.Wall('w')])],
-		[VillageNW(barriers = [barriers.Wall('s'), barriers.Wall('n')]),	VillageN(),  											VillageNE(),	ForestR(),		ForestPath(),  														Forest(),															Clearing(),									Clearing()],
-		[House(barriers = [barriers.Wall('n'), barriers.Wall('s')]),		VillageCenter(barriers = [barriers.WoodenDoor('w')]),	VillageE(),		ForestPath(),	ForestPath(barriers = [barriers.Wall('s')]),   						ForestPath(barriers = [barriers.Wall('n')]),						Clearing(), 								Clearing()],
-		[VillageSW(),														VillageS(),												VillageSE(),	ForestR(),		ForestPath(barriers = [barriers.Wall('w'), barriers.Wall('e')]),	Forest(barriers = [barriers.Wall('w')]),							Forest(),									Forest()],
+		[VillageNW(barriers = [barriers.Wall('s'), barriers.Wall('n')]),							VillageN(),  		VillageNE(),	ForestR(barriers = barriers.Wall('e')),								ForestPath(barriers = [barriers.Wall('w'), barriers.Wall('e')]),  	Forest(barriers = [barriers.Wall('w')]),							learing(),									Clearing()],
+		[House(barriers = [barriers.Wall('n'), barriers.Wall('s'), barriers.WoodenDoor('e')]),		VillageCenter(),	VillageE(),		ForestPath(barriers = [barriers.Wall('n'), barriers.Wall('s')]),	ForestPath(),   													ForestPath(barriers = [barriers.Wall('s'), barriers.Wall('n')]),	Clearing(), 								Clearing()],
+		[VillageSW(),																				VillageS(),			VillageSE(),	ForestR(barriers = barriers.Wall('e')),								ForestPath(barriers = [barriers.Wall('w'), barriers.Wall('e')]),	Forest(barriers = [barriers.Wall('w'), barriers.Wall('n')]),		Forest(),									Forest()],
 		]
+
+#error noticed: when entering ForestPath() game crashes
 
 	def __init__(self):
 		for i in range(len(self.map)):			# We want to set the x, y coordinates for each tile so that it "knows" where it is in the map.

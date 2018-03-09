@@ -7,7 +7,7 @@ import parse
 
 debug_mode = True	# Use this to toggle verbose mode on the text parser.
 
-game_name = "Escape from Cave Terror, v4"
+game_name = "the (mis)adventures of a (mis)adventurer"
 
 help_text = "To interact with this game world, you will use a basic text-based interface. \
 Try single-word commands like 'inventory' or 'west' (or their counterpart abbreviations, 'i' or 'w', respectively \
@@ -16,7 +16,7 @@ or in some cases, [VERB][NOUN][OBJECT] (e.g. 'attack thief with nasty knife').\
 The game will ignore the articles 'a', 'an', and 'the' (e.g. 'open the door' is the same as 'open door.').\n\n\
 To toggle output from the game parser, type 'debug'. To exit the game at any time, type 'exit' or 'quit'."
 
-teleport_text = "With a puff of smoke you have teleported to another location!"
+teleport_text = "Your vision blurs... You faint! You come back to awareness in a fluffy bed."
 		
 				
 

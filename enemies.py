@@ -100,21 +100,21 @@ class ShroomG(Enemy):
 	description = "It looks magical, with a cap that looks like a Starbucks Shamrock Shake."
 	hp = 10
 	damage = 3
-	loot = [items.Iron_Key("An old iron key lies on the ground near the remains of the Rock Monster.")]
+	loot = [items.Green_Potion("A bottle of Green Potion sits in the remains of the Shroom.")]
 
 class ShroomP(Enemy):
 	name = "Pink Shroom"
 	description = "It looks magical, with a cap that looks like a 5-year-old girl's bedroom."
 	hp = 10
 	damage = 3
-	loot = [items.Iron_Key("An old iron key lies on the ground near the remains of the Rock Monster.")]
+	loot = [items.Pink_Potion("A bottle of Pink Potion sits in the remains of the Shroom.")]
 
 class ShroomM(Enemy):
 	name = "Psychedelic Shroom"
 	description = "It looks magical, with a cap that looks like a hippie's t-shirt"
 	hp = 10
 	damage = 3
-	loot = [items.Iron_Key("An old iron key lies on the ground near the remains of the Rock Monster.")]
+	loot = [items.Iron_Key("A bottle of Tie Die Potion sits in the remains of the Shroom.")]
 
 #class Cactus(Enemy):
 #	def __init__(self):
@@ -139,11 +139,11 @@ class VillagerRage(Enemy):
 	description = ""
 	hp = 120
 	damage = 7
-	loot = [items.Iron_Key("An old iron key lies on the ground near the remains of the Rock Monster.")]
+	loot = []
 
 class VillagerSouless(Enemy):
 	name = "Souless Villager"
 	description = ""
 	hp = 100
 	damage = 5
-	loot = [items.Iron_Key("An old iron key lies on the ground near the remains of the Rock Monster.")]
+	loot = []
