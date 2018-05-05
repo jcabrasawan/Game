@@ -83,15 +83,14 @@ class OldMan(NPC):
 						return [True, "'Hey, what are you trying to pull? If you want that, the cost is %d gold.'" % good.value, player]
 		return [False, "", player]
 
-class Villager_basic(NPC):
+class Villager_Basic(NPC):
 	name: "Villager"
-	goods= [items.Shroom(value=1000)]
+	goods= [items.Shroom(value=1000), items.Old_Baguette(value = 5)]
 	quantities=[1]
 
-	description: "Just your generic, nondescript connoiseur of rare pepes. Likes posting pictures of thier Starbucks Coffee on Instagram while dabbing."
-
+	description: "Just your generic, nondescript Villager."
 	def talk(self):
-		print("oh shit waddup?")
+		print("Oh. Hey. Found you passed out on the north side of town, dragged you to my place.")
 	
 	def give(self, item, inventory):
 		for good in self.goods:
@@ -118,8 +117,13 @@ class Villager_basic(NPC):
 				if(good.name.lower() == noun1):
 					if(good.value == 0):
 						player.inventory = self.give(good, player.inventory)
-						return [True, "the meme one handed you the %s" % good.name, player]
-					else:
-						return [True, "'dude, that's not very lit. if you want it, you gotta give me %d gold. *dab*'" % good.value, player]
+						return [True, "The villager tossed you the %s" % good.name, player]
+		elif(verb == 'steal'):
+			for good in self.goods:
+				if player.is_thief = True:
+					player.inventory = self.give(good, player.inventory)
+					return [True, 'Yo man, what gives?! (you obtained the %s' % good.name]
+		else:
+			return [True, "'dude, that's not very cool. if you want it, you gotta give me %s gold." % good.value, player]
 		return [False, "", player]	
 

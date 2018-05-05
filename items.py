@@ -109,7 +109,7 @@ class Iron_Key(Item):
 		
 class Shroom(Item):
 	name = 'Shroom'
-	description = "Carried by every villager. Doesn't do anything, at least you think. They get them from the Shroom House on the west side of town."
+	description = "A small shroom, carried by every villager. Doesn't do anything, at least you think. They get them from the Shroom House on the west side of town."
 
 
 class Consumable(Item):
@@ -205,8 +205,18 @@ class Rusty_Sword(Weapon):
 	
 	damage = 15
 	
+class Potion(Weapon):
+	name = 'basic potion'
+
+	description = "A basic potion. It looks rather stable, but like it could do some damage to a foe."
+	dropped_description = "A basic potion lies on the ground, innocently."
+	equip_description = "You take out the basic potion."
+	attack_descriptions = ["You throw some potion on the enemy.", 'You swing the ever-full bottle at your enemy.', 'You splash the potion everywhere.']
+
+	damage = 10
+
 class Green_Potion(Weapon):
-	name = 'Green Potion'
+	name = 'green potion'
 
 	description = "A bright green potion. It looks volatile, so you feel you should handle it gently. (hint: equip)"
 	dropped_description = "A bright green potion lies on the ground, pulsing with light."
@@ -216,7 +226,7 @@ class Green_Potion(Weapon):
 	damage = 20
 
 class Pink_Potion(Weapon):
-	name = "Pink Potion"
+	name = "pink potion"
 
 	description = "A bright pink potion. You take a sniff and are immediately enveloped in sparkles. You think any more exposure will cause you to die."
 	dropped_description ="A bright pink potion lies on the ground, pulsing with light."
@@ -226,8 +236,8 @@ class Pink_Potion(Weapon):
 	damage = 20
 
 class Multi_Potion(Weapon):
-	name = 'Tie Die Potion'
-	synonyms = ['tie dye potion', 'tye dye potion']
+	name = 'tie-die Potion'
+	synonyms = ['tie dye potion', 'tye dye potion', 'tie die potion']
 
 	description = "A tie-die potion. That's a pun, not a typo. Seems dangerous."
 	dropped_description = "A bright tie-die potion lies on the ground, pulsing with light."
@@ -237,7 +247,7 @@ class Multi_Potion(Weapon):
 	damage = 30
 
 class Old_Muffin(Weapon):
-	name = "Old Muffin"
+	name = "old muffin"
 	synonyms = ['stale muffin']
 
 	description = "An old, stale muffin. It feels like it'd do the damage of a heavy rock. (hint: equip)"
@@ -245,10 +255,10 @@ class Old_Muffin(Weapon):
 	equip_description = "You carefully hold the rock-like muffin in your hand."
 	attack_descriptions = ['You hit the enemy with the muffin', 'You swing viciously at it with a muffin.']
 
-	damage = 20
+	damage = 10
 
 class Old_Baguette(Weapon):
-	name = 'Old Baguette'
+	name = 'old baguette'
 	synonyms = ['stale baguette', 'long baguette']
 
 	description = "A long, stale baguette. It's hard enough to use as a bo staff. (hint: equip)"
@@ -259,7 +269,7 @@ class Old_Baguette(Weapon):
 	damage = 20
 
 class Old_Cupcake(Weapon):
-	name = 'Old Cupcake'
+	name = 'old cupcake'
 	synonyms = ['stale cupcake', 'rancid cupcake']
 
 	description = "A stale cupcake. The icing looks rancid, and when you smell it you're immediately hit with debilitating nausea. (hint: equip)"
@@ -325,6 +335,8 @@ class Old_Chest(Container):
 								return [True, self.contents[index].check_text(), player]
 		return [False, None, player]
 		
+
+
 
 class Class(Item):
 	define_description = "Flavor text in subclass"

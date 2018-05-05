@@ -4,6 +4,7 @@ game_commands = {'help': ['help'], 'exit': ['exit', 'quit'], 'debug': ['debug']}
 
 verbs = {'go': ['go', 'go to', 'walk', 'head', 'move'], \
 	'take': ['take', 'pick up', 'grab', 'get'], \
+	'steal',\
 	'give': ['give', 'hand'], \
 	'drop': ['drop', 'put down', 'throw away'], \
 	'open': ['open'], \
@@ -23,7 +24,7 @@ verbs = {'go': ['go', 'go to', 'walk', 'head', 'move'], \
 	'assign': ['change','become', 'class change', 'change class'],\
 	'climb' : ['scale', 'up',]}
 	
-implied_verbs = {'go': {'north': ['north', 'n'], 'south': ['south', 's'], 'east': ['east', 'e'], 'west': ['west', 'w']}, 'check': {'inventory': ['inventory', 'i'], 'hp': {'hp', 'health'}}}
+implied_verbs = {'go': {'north': ['north', 'n', 'w'], 'south': ['south', 's'], 'east': ['east', 'e','d'], 'west': ['west', 'w', 'q']}, 'check': {'inventory': ['inventory', 'i'], 'hp': {'hp', 'health'}}}
 	
 prepositions = ["with", "to", "on", "from", "at"]
 

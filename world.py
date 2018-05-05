@@ -208,13 +208,13 @@ class Corridor(MapTile):
 			text += " " + item.room_text()
 		return text
 		
-class StoreRoom(MapTile):
-	items = [items.Rusty_Sword("A rusty sword is propped against a shelf in the corner of the room."), \
-			items.Red_Potion("A glowing bottle of mysterious red potion sits on one of the shelves."), \
-			items.Old_Chest([items.Mountain_of_Gold()]), \
-			items.Gold_Coins("A shiny handful of gold coins is on the ground near the chest.")]
+#class StoreRoom(MapTile):
+#	items = [items.Rusty_Sword("A rusty sword is propped against a shelf in the corner of the room."), \
+#			items.Red_Potion("A glowing bottle of mysterious red potion sits on one of the shelves."), \
+#			items.Old_Chest([items.Mountain_of_Gold()]), \
+#			items.Gold_Coins("A shiny handful of gold coins is on the ground near the chest.")]
 	
-	description = """You seem to have entered an underground storeroom!"""
+#	description = """You seem to have entered an underground storeroom!"""
 		
 class ExpanseSW(MapTile):
 	description = """You find yourself in an expansive cavern, with walls stretching out nearly as far as the eye can see. The room opens before you to the northeast."""
@@ -270,7 +270,7 @@ class VictoryTile(MapTile):
 		"""
 
 class Start(MapTile):
-	items = [items.Ancient_Coin('An antique coin sits on the ground. '), items.Fluffy_Blanket('A baby blanket is next to the coin. It looks soft.'), items.Toy_Skull('A beaten-up toy skull is next to the blanket.')]
+	items = [items.Ancient_Coin('An antique coin sits on the ground. '), items.Fluffy_Blanket('A baby blanket is next to the coin. It looks soft.'), items.Toy_Skull('A beaten-up toy skull is next to the blanket. [Hint: use w, q, s, and d to move]')]
 	description = "You're in a small, drab room with no apparent way out."
 	item_taken = False
 	
@@ -342,6 +342,7 @@ class VillageNE(MapTile):
 class VillageCenter(MapTile):
    
 	description = "It's a small village with plenty of friendly villagers. The village extends in all directions."
+	npcs = []
 
 class VillageE(MapTile):
    
@@ -361,62 +362,43 @@ class VillageSE(MapTile):
 
 class Forest(MapTile):
 	
-	description = "You're surrounded by tall trees."
+	description = "You're surrounded by tall trees. You hear a faint rustling of grass, and glimpse a hint of sunlight through the trees."
 	
 class ForestL(MapTile):
 	description = "You're surrounded by tall trees. You can hear muffled chatter through the trees to the east."
+
 class ForestR(MapTile):
 	description = "You're surrounded by tall trees. You can hear muffled chatter through the trees to the west."
 
 class ForestPath(MapTile):
 	description = "You're on a small path surrounded by tall trees." 
 
-	def intro_text(self):	# Since this tile appears so much, I gave it its own intro_text function to make its text more descriptive.
-		text = self.description
-			
-		directions_clear = ['north', 'south', 'east', 'west']
-		for barrier in self.barriers:
-			try:
-				directions_clear.pop(directions_clear.index(barrier.direction))		# Attempt to remove the barrier's direction from the list of clear directions.
-			except:
-				pass		# If the barrier direction is not in the list of clear directions already, then we ignore it.
-		#for enemy in self.contents['enemies']:
-		#	text += " " + enemy.description()
-		
-		if(len(directions_clear) == 1):
-			text += " There is a path leading to the %s." % directions_clear[0]
-		elif(len(directions_clear) == 2):
-			text += " There are small trails leading to the %s and %s." % (directions_clear[0], directions_clear[1])
-		elif(len(directions_clear) == 3):
-			text += " There are small trails leading to the %s, %s, and %s." % (directions_clear[0], directions_clear[1], directions_clear[2])
-		elif(len(directions_clear) == 4):
-			text += " It appears that the path is clear in all directions." 
-	
-
-
 class Clearing(MapTile):
 
 	description = "It's a small clearing."
 
 	def random_spawn(self):
-		if(randint(0,3) == 0):		# 1 in 4 odds.
+		if(randint(0,1) == 0):		# 1 in 2 odds.
 			self.enemies = [enemies.ShroomG() or enemies.ShroomM() or enemies.ShroomP()]
 		else:
 			self.enemies = []
 	
-	
 class House(MapTile):
 	description = "It's a warm, welcoming house. You wonder who it belongs to."
-	items = []
+	items = [items.Potion("A basic potion sits innoculously on a dusty shelf."),\
+			items.Old_Muffin('A stale muffin sits by the potion.'),\
+			items.Dagger('A blunt dagger is on the shelf too.'),\
+			items.Gold_Coins('A small handful of coins is on the ground.'),
+	]
 	npcs = []
 	
 		
 class World:									# I choose to define the world as a class. This makes it more straightforward to import into the game.
 	map = [
 		[Start(barriers = [barriers.Wall('e'), barriers.Wall('s'), barriers.Wall('w')])],
-		[VillageNW(barriers = [barriers.Wall('s'), barriers.Wall('n')]),							VillageN(),  		VillageNE(),	ForestR(barriers = barriers.Wall('e')),								ForestPath(barriers = [barriers.Wall('w'), barriers.Wall('e')]),  	Forest(barriers = [barriers.Wall('w')]),							learing(),									Clearing()],
-		[House(barriers = [barriers.Wall('n'), barriers.Wall('s'), barriers.WoodenDoor('e')]),		VillageCenter(),	VillageE(),		ForestPath(barriers = [barriers.Wall('n'), barriers.Wall('s')]),	ForestPath(),   													ForestPath(barriers = [barriers.Wall('s'), barriers.Wall('n')]),	Clearing(), 								Clearing()],
-		[VillageSW(),																				VillageS(),			VillageSE(),	ForestR(barriers = barriers.Wall('e')),								ForestPath(barriers = [barriers.Wall('w'), barriers.Wall('e')]),	Forest(barriers = [barriers.Wall('w'), barriers.Wall('n')]),		Forest(),									Forest()],
+		[VillageNW(barriers = [barriers.Wall('s'), barriers.Wall('n')]),							VillageN(),  		VillageNE(),	ForestR(),	Forest(),  	Clearing(),		Clearing()],
+		[House(barriers = [barriers.Wall('n'), barriers.Wall('s'), barriers.WoodenDoor('e')]),		VillageCenter(),	VillageE(),		ForestR(),	Forest(),   Clearing(),		Clearing()], 
+		[VillageSW(barriers = [barriers.Wall('n')]),												VillageS(),			VillageSE(),	ForestR(),	Forest(),	Forest(),		Forest()],
 		]
 
 #error noticed: when entering ForestPath() game crashes
