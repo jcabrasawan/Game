@@ -40,7 +40,7 @@ class OldMan(NPC):
 	description = "You see an old man carrying large sacks of... something."
 	
 	def talk(self):		# Add to this method if you want to be able to talk to your NPC.
-		print("If you're ever feeling weak, I've got just the stuff for you; at the right price, of course. [Actions: buy, take, steal]")
+		print("If you're ever feeling weak, I've got just the stuff for you; at the right price, of course. [Actions: buy, steal]")
 		for item in self.goods:
 			if item.value > 0:
 				if(self.quantities[self.goods.index(item)] > 0):
@@ -75,26 +75,28 @@ class OldMan(NPC):
 			elif(verb == 'talk'):
 				text = self.talk()
 				return [True, text, player]
-		elif(verb == 'take'):
-			for good in self.goods:
-				if(good.name.lower() == noun1):
-					if(good.value == 0):
+			elif(verb == 'buy'):
+				for good in self.goods:
+					if(player.is_thief == False):
+						if(good.name.lower() == noun1):
+							if(good.value == 0):
+								player.inventory = self.give(good, player.inventory)
+								return [True, "W.D. tossed you the %s" % good.name, player]
+							else:
+								return [True, "Dude, that's not very cool. if you want it, you gotta give me %s gold." % good.value, player]
+					else: 
+						return[True, "You can't do that, I'm afraid. [You must be a Mage or a Warrior to complete this action.]"]
+			elif(verb == 'steal'):
+				for good in self.goods:
+					if(player.is_thief == True):
 						player.inventory = self.give(good, player.inventory)
-						return [True, "The merchant threw the %s at you." % good.name, player]
-					else:
-						return [True, "'Hey, what are you trying to pull? If you want that, the cost is %d gold.'" % good.value, player]
-		elif(verb == 'steal'):
-			for good in self.goods:
-				if(player.is_thief == True):
-					player.inventory = self.give(good, player.inventory)
-					return [True, "It's terribly rude to steal from an old man... (you obtained the %s , feeling incredibly guilty.)" % good.name, player]
-				elif(player.is_mage == True): 
-					return[True, "You can't do that, I'm afraid. [You must be a Thief to complete this action.]", player]
-				elif(player.is_warrior == True): 
-					return[True, "You can't do that, I'm afraid. [You must be a Thief to complete this action.]", player]
-		return [False, "", player]
+						return [True, "It's terribly rude to steal from an old man... (you obtained the %s , feeling incredibly guilty.)" % good.name, player]
+					else: 
+						return[True, "You can't do that, I'm afraid. [You must be a Thief to complete this action.]", player]
+			return [False, "", player]
 
 #steal is only returning shroom
+#attempt to exclude buy from thief = failed, for now
 
 class Villager_WD(NPC):
 	name: 'Vill W.D. Ager'
@@ -104,7 +106,7 @@ class Villager_WD(NPC):
 	description = "You see a small man a few paces away. He's wearing a nametag that says 'Vill W.D. Ager'. (You should probably call him that, he looks quite dangerous if angry)."
 	
 	def talk(self):
-		print("What d'you want? [Actions: buy, take, steal]")
+		print("What d'you want? [Actions: buy, steal]")
 		for item in self.goods:
 			if item.value > 0:
 				if(self.quantities[self.goods.index(item)] > 0):
@@ -140,14 +142,17 @@ class Villager_WD(NPC):
 			elif(verb == 'talk'):
 				text = self.talk()
 				return [True, text, player]
-			elif(verb == 'take'):
+			elif(verb == 'buy'):
 				for good in self.goods:
-					if(good.name.lower() == noun1):
-						if(good.value == 0):
-							player.inventory = self.give(good, player.inventory)
-							return [True, "W.D. tossed you the %s" % good.name, player]
-						else:
-							return [True, "Dude, that's not very cool. if you want it, you gotta give me %s gold." % good.value, player]
+					if(player.is_thief == False):
+						if(good.name.lower() == noun1):
+							if(good.value == 0):
+								player.inventory = self.give(good, player.inventory)
+								return [True, "W.D. tossed you the %s" % good.name, player]
+							else:
+								return [True, "Dude, that's not very cool. if you want it, you gotta give me %s gold." % good.value, player]
+					else: 
+						return[True, "You can't do that, I'm afraid. [You must be a Mage or a Warrior to complete this action.]"]
 		return [False, "", player]	
 
 class Villager(NPC):
