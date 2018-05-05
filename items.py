@@ -109,7 +109,8 @@ class Iron_Key(Item):
 		
 class Shroom(Item):
 	name = 'Shroom'
-	description = "A small shroom, carried by every villager. Doesn't do anything, at least you think. They get them from the Shroom House on the west side of town."
+	description = "A small shroom, carried by every villager. Doesn't do anything, at least you think. They get them from the Shroom House."
+	dropped_description = "A shroom is on the ground. Someone should pick that up."
 
 
 class Consumable(Item):

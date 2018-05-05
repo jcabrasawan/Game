@@ -4,7 +4,7 @@ game_commands = {'help': ['help'], 'exit': ['exit', 'quit'], 'debug': ['debug']}
 
 verbs = {'go': ['go', 'go to', 'walk', 'head', 'move'], \
 	'take': ['take', 'pick up', 'grab', 'get'], \
-	'steal',\
+	'steal': ['steal'], \
 	'give': ['give', 'hand'], \
 	'drop': ['drop', 'put down', 'throw away'], \
 	'open': ['open'], \
@@ -17,7 +17,7 @@ verbs = {'go': ['go', 'go to', 'walk', 'head', 'move'], \
 	'consume': ['consume', 'eat', 'drink'], \
 	'unlock': ['unlock'], \
 	'lock': ['lock'], \
-	'check': ['check', 'look at', 'look in', 'look', 'examine', 'inspect'], \
+	'check': ['check', 'look at', 'look in', 'look', 'examine', 'inspect', 'l'], \
 	'attack': ['attack', 'fight', 'kill'], \
 	'talk': ['talk to', 'talk', 'speak to', 'speak'], \
 	'buy': ['buy', 'purchase'],\

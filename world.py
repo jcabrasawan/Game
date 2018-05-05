@@ -334,6 +334,7 @@ class VillageNW(MapTile):
 class VillageN(MapTile):
    
 	description = "It's a small village with plenty of friendly villagers. The village expands before you to the south."
+	npcs = [npc.Villager()]
 
 class VillageNE(MapTile):
    
@@ -342,19 +343,22 @@ class VillageNE(MapTile):
 class VillageCenter(MapTile):
    
 	description = "It's a small village with plenty of friendly villagers. The village extends in all directions."
-	npcs = []
+	npcs = [npc.OldMan()]
 
 class VillageE(MapTile):
    
 	description = "It's a small village with plenty of friendly villagers. The village expands before you to the west."
+	npcs = [npc.Villager()]
 
 class VillageSW(MapTile):
    
 	description = "It's a small village with plenty of friendly villagers. The village expands before you to the northeast."
+	npcs = [npc.Villager()]
 
 class VillageS(MapTile):
    
 	description = "It's a small village with plenty of friendly villagers. The village expands before you to the north."
+	npcs = [npc.Villager_WD()]
 
 class VillageSE(MapTile):
    
@@ -363,15 +367,14 @@ class VillageSE(MapTile):
 class Forest(MapTile):
 	
 	description = "You're surrounded by tall trees. You hear a faint rustling of grass, and glimpse a hint of sunlight through the trees."
+
+class ForestV(MapTile):
 	
-class ForestL(MapTile):
-	description = "You're surrounded by tall trees. You can hear muffled chatter through the trees to the east."
-
+	description = "You're surrounded by tall trees. You hear a faint rustling of grass, and glimpse a hint of sunlight through the trees."
+	npcs = [npc.Villager()]
+	
 class ForestR(MapTile):
-	description = "You're surrounded by tall trees. You can hear muffled chatter through the trees to the west."
-
-class ForestPath(MapTile):
-	description = "You're on a small path surrounded by tall trees." 
+	description = "You're surrounded by tall trees. You can hear muffled chatter through the trees to the west." 
 
 class Clearing(MapTile):
 
@@ -388,7 +391,7 @@ class House(MapTile):
 	items = [items.Potion("A basic potion sits innoculously on a dusty shelf."),\
 			items.Old_Muffin('A stale muffin sits by the potion.'),\
 			items.Dagger('A blunt dagger is on the shelf too.'),\
-			items.Gold_Coins('A small handful of coins is on the ground.'),
+			items.Gold_Coins('A small handful of gold coins is on the ground.'),
 	]
 	npcs = []
 	
@@ -398,7 +401,7 @@ class World:									# I choose to define the world as a class. This makes it mo
 		[Start(barriers = [barriers.Wall('e'), barriers.Wall('s'), barriers.Wall('w')])],
 		[VillageNW(barriers = [barriers.Wall('s'), barriers.Wall('n')]),							VillageN(),  		VillageNE(),	ForestR(),	Forest(),  	Clearing(),		Clearing()],
 		[House(barriers = [barriers.Wall('n'), barriers.Wall('s'), barriers.WoodenDoor('e')]),		VillageCenter(),	VillageE(),		ForestR(),	Forest(),   Clearing(),		Clearing()], 
-		[VillageSW(barriers = [barriers.Wall('n')]),												VillageS(),			VillageSE(),	ForestR(),	Forest(),	Forest(),		Forest()],
+		[VillageSW(barriers = [barriers.Wall('n')]),												VillageS(),			VillageSE(),	ForestR(),	Forest(),	Forest(),		ForestV()],
 		]
 
 #error noticed: when entering ForestPath() game crashes

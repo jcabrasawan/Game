@@ -2,11 +2,11 @@ import items
 #testing git
 class Player:
 	def __init__(self):
-		self.inventory = [items.Crusty_Bread(), items.Green_Potion(), items.Old_Cupcake()]
+		self.inventory = []
 						
 		self.weapon = None
 		
-		self.gold = 5
+		self.gold = 0
 		
 		self.hp = 30
 		self.max_hp = 50
@@ -33,6 +33,12 @@ class Player:
 			print(inventory_text)
 			best_weapon = self.most_powerful_weapon()
 		print("* %i Gold" % self.gold)
+		
+		if(self.hp != self.max_hp):
+			print("HP: %f" % self.hp)
+		else:
+			print("HP: %x (max)" % self.max_hp)
+		
 		if(best_weapon):
 			print("Your best weapon is your {}.".format(best_weapon))
 		else:
@@ -168,6 +174,7 @@ class Player:
 		self.mp = 75
 		self.carry = 25
 		self.is_mage = True   
+		self.is_thief = False
 
 		description = "You can do all sorts of mage-like things now " \
 					"like eat souls and fight with mushrooms. Because obviously that's how this all works."
@@ -179,6 +186,7 @@ class Player:
 		self.mp = 0
 		self.carry = 20
 		self.is_warrior = True
+		self.is_thief = False
 
 		description = "You're an all-around cool dude warrior, well-loved by everyone. " \
 					"You were the bomb back in high school, voted most likely to be successful for 3 years, but " \
