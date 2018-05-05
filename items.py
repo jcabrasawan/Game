@@ -188,6 +188,7 @@ class Rock(Weapon):
 
 class Dagger(Weapon):
 	name = "dagger"
+	synonyms = ['blunt dagger', 'small dagger']
 	
 	description = "A small dagger with some rust. It looks pretty sharp."
 	dropped_description = "A dagger lies on the ground. It looks somewhat more dangerous than a rock."

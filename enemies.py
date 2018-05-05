@@ -95,25 +95,25 @@ class RockMonster(Enemy):
 
 
 class ShroomG(Enemy):
-	name = "Green Shroom"
+	name = "Green Mushroom"
 	description = "A strange green mushroom appeared! It looks magical, with a cap that looks like a Starbucks Shamrock Shake."
 	hp = 20
 	damage = 3
 	loot = [items.Green_Potion("A bottle of Green Potion sits in the remains of the Shroom.")]
 
 class ShroomP(Enemy):
-	name = "Pink Shroom"
+	name = "Pink Mushroom"
 	description = "A fabulous pink mushroom appeared! It looks magical, with a cap that looks like a 5-year-old girl's bedroom."
 	hp = 20
 	damage = 3
 	loot = [items.Pink_Potion("A bottle of Pink Potion sits in the remains of the Shroom.")]
 
 class ShroomM(Enemy):
-	name = "Psychedelic Shroom"
-	description = "A headache-inducingly bright mushroom appeared! Slightly stronger than its brethren, it looks magical, with a cap that looks like a hippie's t-shirt."
+	name = "Psychedelic Mushroom"
+	description = "A headache-inducingly psychedelic mushroom appeared! Slightly stronger than its brethren, it looks magical, with a cap that looks like a hippie's t-shirt."
 	hp = 40
 	damage = 3
-	loot = [items.Iron_Key("A bottle of Tie Die Potion sits in the remains of the Shroom.")]
+	loot = [items.Multi_Potion("A bottle of Tie Die Potion sits in the remains of the Shroom.")]
 
 #class Cactus(Enemy):
 #	def __init__(self):

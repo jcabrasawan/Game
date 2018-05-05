@@ -379,10 +379,14 @@ class ForestR(MapTile):
 class Clearing(MapTile):
 
 	description = "It's a small clearing."
-
+#only spawns green shrooms?
 	def random_spawn(self):
-		if(randint(0,1) == 0):		# 1 in 2 odds.
-			self.enemies = [enemies.ShroomG() or enemies.ShroomM() or enemies.ShroomP()]
+		if(randint(0,6) == 0 or 3):		# 1 in 7 odds.
+			self.enemies = [enemies.ShroomG()]
+		elif(randint(0,6) == 1 or 4):
+			self.enemies = [enemies.ShroomP()]
+		elif(randint(0,6) == 2):
+			self.enemies = [enemies.ShroomM()]
 		else:
 			self.enemies = []
 	
